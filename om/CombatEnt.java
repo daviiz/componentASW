@@ -3,8 +3,10 @@ package componentASW.om;
 import GenCol.ExternalRepresentation;
 
 /**
- * 战斗实体基类，用于交战实体之间的消息传输及状态记录：
- * */
+ *  战斗实体基类，用于交战实体之间的消息传输及状态记录
+ * @author daiwenzhi
+ * @DATATIME 2018年12月25日 下午4:17:52
+ */
 public class CombatEnt extends GenCol.entity {
 	//位置信息
 	protected int x;

@@ -1,7 +1,11 @@
 package componentASW.om;
 
 import java.util.List;
-
+/**
+ * 
+ * @author daiwenzhi
+ * @DATATIME 2018年12月25日 下午4:18:17
+ */
 public class OM_Sensor {
 	
 	//stores other platforms’ physical information

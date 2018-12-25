@@ -14,7 +14,11 @@ import java.awt.Point;
 
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
-
+/**
+ * 
+ * @author daiwenzhi
+ * @DATATIME 2018年12月25日 下午4:20:40
+ */
 public class Weapon extends ViewableDigraph{
 	
 	protected int x;

@@ -14,7 +14,11 @@ import componentASW.om.CombatEnt;
 import model.modeling.content;
 import model.modeling.message;
 import view.modeling.ViewableAtomic;
-
+/**
+ * 
+ * @author daiwenzhi
+ * @DATATIME 2018年12月25日 下午4:16:31
+ */
 public class Generator extends ViewableAtomic{
 
     

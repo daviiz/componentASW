@@ -2,7 +2,11 @@ package componentASW.platform;
 
 import model.modeling.message;
 import view.modeling.ViewableAtomic;
-
+/**
+ * 
+ * @author daiwenzhi
+ * @DATATIME 2018年12月25日 下午4:19:48
+ */
 public class Sensor_Actor extends ViewableAtomic {
 	
 	

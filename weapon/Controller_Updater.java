@@ -2,7 +2,11 @@ package componentASW.weapon;
 
 import model.modeling.message;
 import view.modeling.ViewableAtomic;
-
+/**
+ * 
+ * @author daiwenzhi
+ * @DATATIME 2018年12月25日 下午4:20:25
+ */
 public class Controller_Updater extends ViewableAtomic {
 	
 	

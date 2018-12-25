@@ -11,7 +11,11 @@ package componentASW.ef;
 
 import model.modeling.message;
 import view.modeling.ViewableAtomic;
-
+/**
+ * 
+ * @author daiwenzhi
+ * @DATATIME 2018年12月25日 下午4:16:36
+ */
 public class Transducer extends ViewableAtomic{
 
     protected double processing_time;

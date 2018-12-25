@@ -1,13 +1,16 @@
 package componentASW.platform;
 
+import GenCol.entity;
+import model.modeling.content;
 import model.modeling.message;
 import view.modeling.ViewableAtomic;
-/**
-	Then the Actor model operates proper tactical processes from target 
-	tracking to tactical evasion with identified target information.
- * 
- * */
 
+/**
+ * Then the Actor model operates proper tactical processes from target 
+ * tracking to tactical evasion with identified target information.
+ * @author daiwenzhi
+ * @DATATIME 2018年12月25日 下午4:18:44
+ */
  public class Controller_Actor extends ViewableAtomic {
 	
 	 private double   tRECON; 
@@ -53,19 +56,124 @@ import view.modeling.ViewableAtomic;
 
     // Add external transition function
     public void deltext(double e, message x){
+    	Continue(e);
+		for (int i = 0; i < x.size(); i++) {
+			if (phaseIs("IDLE")) {
+				if (messageOnPort(x, "scen_info", i)) {
+					holdIn("RECONNNAISSANCE", tRECON);
+				} else if (messageOnPort(x, "move_finished", i)) {
+					holdIn("RECONNNAISSANCE", tRECON);
+				} else if (messageOnPort(x, "target_info", i)) {
+					holdIn("APPROACH", tAPPRCH);
+				} else if (messageOnPort(x, "guidance_info", i)) {
+					holdIn("CONTROL", tCTRL);
+				} else if (messageOnPort(x, "engage_result", i)) {
+					holdIn("END", INFINITY);
+				}
+			} else if (phaseIs("COMBAT")) {
+				if (messageOnPort(x, "target_info", i)) {
+					holdIn("COMBAT", tCOMBAT);
+				}
+			} else if (phaseIs("CONTROL")) {
+				if (messageOnPort(x, "target_info", i)) {
+					holdIn("CONTROL", tCTRL);
+				} else if (messageOnPort(x, "engage_result", i)) {
+					holdIn("END", INFINITY);
+				}
+			} else if (phaseIs("EVASION")) {
+				if (messageOnPort(x, "target_info", i)) {
+					holdIn("EVASION", tEVASION);
+				}
+			}
+		}
     }
 
     // Add internal transition function
     public void deltint(){
+    	if (phaseIs("RECONNAISSANCE")) {
+    		
+    		holdIn("IDLE",INFINITY);
+    		
+    	}else if(phaseIs("APPROACH")) {
+    		
+    		holdIn("IDLE",INFINITY);
+    		//?红蓝区分吗?
+    		//holdIn("COMBAT",tCOMBAT);
+    		
+    	}else if(phaseIs("COMBAT")) {
+    		
+    		holdIn("EVASION",tEVASION);
+    		
+    	}else if(phaseIs("EVASION")) {
+    		
+    		holdIn("IDLE",INFINITY);
+    	}else if(phaseIs("CONTROL")) {
+    		
+    		holdIn("IDLE",INFINITY);
+    	}
     }
 
     // Add confluent function
-    public void deltcon(double e, message x){
-    }
+//    public void deltcon(double e, message x){
+//    }
 
     // Add output function
-    public message out(){return null;
+    public message out(){
+    	message m = new message();
+    	if(phaseIs("RECONNAISSANCE")) {
+			//message m = new message();
+			content con = makeContent("move_cmd", new entity(""));
+			m.add(con);
+			return m;
+		}
+    	else if(phaseIs("APPROACH")){
+    		content con = makeContent("move_cmd", new entity(""));
+			m.add(con);
+    		return m;
+		}
+		else if(phaseIs("COMBAT")){
+			content con = makeContent("wp_launch", new entity(""));
+			m.add(con);
+			return m;
+		}
+		else if(phaseIs("EVASION")){
+			content con = makeContent("move_cmd", new entity(""));
+			m.add(con);
+			return m;
+		}
+		else if(phaseIs("CONTROL")){
+			content con = makeContent("wp_guidance", new entity(""));
+			m.add(con);
+			return m;
+		}
+		else {
+			return null;
+		}
     }
+
+	public void settRECON(double tRECON) {
+		this.tRECON = tRECON;
+	}
+
+	public void settAPPRCH(double tAPPRCH) {
+		this.tAPPRCH = tAPPRCH;
+	}
+
+	public void settCOMBAT(double tCOMBAT) {
+		this.tCOMBAT = tCOMBAT;
+	}
+
+	public void settEVASION(double tEVASION) {
+		this.tEVASION = tEVASION;
+	}
+
+	public void settCTRL(double tCTRL) {
+		this.tCTRL = tCTRL;
+	}
+
+	public void settEND(double tEND) {
+		this.tEND = tEND;
+	}
 
     // Add Show State function
 

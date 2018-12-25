@@ -1,5 +1,9 @@
 package componentASW.om;
-
+/**
+ * 
+ * @author daiwenzhi
+ * @DATATIME 2018年12月25日 下午4:18:28
+ */
 public class SimParameter {
 	
 	///Surface ship:
