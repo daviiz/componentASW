@@ -116,6 +116,7 @@ public class SimParameter {
 	
 	/**
 	 * (s)  Time period from launch to expiration
+	 * 	鱼雷诱饵的生命周期
 	 * */
 	public static int Operation_time_Decoy = 540;
 	
