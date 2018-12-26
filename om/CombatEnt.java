@@ -3,26 +3,25 @@ package componentASW.om;
 import GenCol.ExternalRepresentation;
 
 /**
- *  战斗实体基类，用于交战实体之间的消息传输及状态记录
+ * 战斗实体基类，用于交战实体之间的消息传输及状态记录
+ * 
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:17:52
  */
 public class CombatEnt extends GenCol.entity {
-	//位置信息
+	// 位置信息
 	protected int x;
-	
+
 	protected int y;
-	
-	//"live" "destroyed"
+
+	// "live" "destroyed"
 	protected String status;
-	
-	protected int belong; //1 红方,0  中立方,-1 蓝方
-	
-	protected int _type;  //0:platform, 1:weapon,-1 未定义
-	
-	protected String sendorder;//发送的指令
-	
-	
+
+	protected int belong; // 1 红方,0 中立方,-1 蓝方
+
+	protected int _type; // 0:platform, 1:weapon,-1 未定义
+
+	protected String sendorder;// 发送的指令
 
 	public CombatEnt() {
 		this.name = "combatEntBase";
@@ -33,7 +32,7 @@ public class CombatEnt extends GenCol.entity {
 		this._type = -1;
 		this.sendorder = "";
 	}
-	
+
 	public CombatEnt(CombatEnt ent) {
 		this.name = ent.name;
 		this.status = ent.status;
@@ -43,7 +42,8 @@ public class CombatEnt extends GenCol.entity {
 		this._type = ent._type;
 		this.sendorder = ent.sendorder;
 	}
-	public CombatEnt(String name,int x,int y,String status,int belong,int _type,String sendorder) {
+
+	public CombatEnt(String name, int x, int y, String status, int belong, int _type, String sendorder) {
 		this.name = name;
 		this.status = status;
 		this.x = x;
@@ -52,7 +52,7 @@ public class CombatEnt extends GenCol.entity {
 		this._type = _type;
 		this.sendorder = sendorder;
 	}
-	
+
 	public boolean eq(String nm) {
 		return getName().equals(nm);
 	}
@@ -63,7 +63,7 @@ public class CombatEnt extends GenCol.entity {
 		else
 			return null;
 	}
-	
+
 	public boolean equals(Object o) { // overrides pointer equality of Object
 		if (!(o instanceof CombatEnt))
 			return false;
@@ -74,14 +74,17 @@ public class CombatEnt extends GenCol.entity {
 	public ExternalRepresentation getExtRep() {
 		return new ExternalRepresentation.ByteArray();
 	}
-	
+
 	public String toString() {
 
-		return ("name  " + name +"X  " + x + " Y  " + y + " status  " + status+"Belong  " + belong+"_type  " + _type);
+		return ("name  " + name + "X  " + x + " Y  " + y + " status  " + status + "Belong  " + belong + "_type  "
+				+ _type);
 	}
+
 	public void print() {
 		System.out.println(name);
 	}
+
 	public int getX() {
 		return x;
 	}
@@ -105,7 +108,7 @@ public class CombatEnt extends GenCol.entity {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 	public int getBelong() {
 		return belong;
 	}
@@ -121,7 +124,7 @@ public class CombatEnt extends GenCol.entity {
 	public void set_type(int _type) {
 		this._type = _type;
 	}
-	
+
 	public String getSendorder() {
 		return sendorder;
 	}

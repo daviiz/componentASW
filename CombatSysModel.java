@@ -14,52 +14,55 @@ import java.awt.Point;
 
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
+
 /**
  * 
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:33
  */
-public class CombatSysModel extends ViewableDigraph{
-	
-	private ViewableDigraph ef_1_1 ;
-	private ViewableDigraph simModel_1_1;
-    // Add Default Constructor
-    public CombatSysModel(){
-        this("CombatSystem");
-    }
+public class CombatSysModel extends ViewableDigraph {
 
-    // Add Parameterized Constructor
-    public CombatSysModel(String name){
-        super(name);
+	private ViewableDigraph ef_1_1;
+	private ViewableDigraph simModel_1_1;
+
+	// Add Default Constructor
+	public CombatSysModel() {
+		this("CombatSystem");
+	}
+
+	// Add Parameterized Constructor
+	public CombatSysModel(String name) {
+		super(name);
 
 // Structure information start
-        // Add input port names
+		// Add input port names
 
-        // Add output port names
+		// Add output port names
 
 //add test input ports:
 
-        // Initialize sub-components
-         ef_1_1 =  new ExperimentFrame("f");
-         simModel_1_1 =  new SimModel("sim");
+		// Initialize sub-components
+		ef_1_1 = new ExperimentFrame("f");
+		simModel_1_1 = new SimModel("sim");
 
-        // Add sub-components
-        add(ef_1_1);
-        add(simModel_1_1);
+		// Add sub-components
+		add(ef_1_1);
+		add(simModel_1_1);
 
-        // Add Couplings
-        addCoupling(ef_1_1, "entity_info", simModel_1_1, "entity_info");
-        addCoupling(ef_1_1, "scen_info", simModel_1_1, "scen_info");
-        addCoupling(simModel_1_1, "engage_result", ef_1_1, "engage_result");
-        addCoupling(simModel_1_1, "wp_launch", ef_1_1, "wp_launch");
+		// Add Couplings
+		addCoupling(ef_1_1, "entity_info", simModel_1_1, "entity_info");
+		addCoupling(ef_1_1, "scen_info", simModel_1_1, "scen_info");
+		addCoupling(simModel_1_1, "engage_result", ef_1_1, "engage_result");
+		addCoupling(simModel_1_1, "wp_launch", ef_1_1, "wp_launch");
 
 // Structure information end
-        initialize();
-        }
-	    public void layoutForSimView() {
-			preferredSize = new Dimension(2300, 1800);
-			((ViewableComponent) withName("f")).setPreferredLocation(new Point(5, 5));
-			((ViewableComponent) withName("sim")).setPreferredLocation(new Point(5, 200));
-		}
+		initialize();
+	}
 
-    }
+	public void layoutForSimView() {
+		preferredSize = new Dimension(2300, 1800);
+		((ViewableComponent) withName("f")).setPreferredLocation(new Point(5, 5));
+		((ViewableComponent) withName("sim")).setPreferredLocation(new Point(5, 200));
+	}
+
+}

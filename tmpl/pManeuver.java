@@ -17,16 +17,17 @@ import componentASW.platform.Maneuver_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
+
 /**
  * 
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:40
  */
 public class pManeuver extends ViewableDigraph {
-	
-	private ViewableAtomic updater ;
-	private ViewableAtomic actor ;
-	
+
+	private ViewableAtomic updater;
+	private ViewableAtomic actor;
+
 	// Add Default Constructor
 	public pManeuver() {
 		this("pManeuver_0_0");
@@ -50,8 +51,8 @@ public class pManeuver extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-		 updater = new Maneuver_Updater("updater");
-		 actor = new Maneuver_Actor("actor");
+		updater = new Maneuver_Updater("updater");
+		actor = new Maneuver_Actor("actor");
 
 		// Add sub-components
 		add(updater);
@@ -72,6 +73,7 @@ public class pManeuver extends ViewableDigraph {
 // Structure information end
 		initialize();
 	}
+
 	public void layoutForSimView() {
 		preferredSize = new Dimension(550, 120);
 		((ViewableComponent) withName("updater")).setPreferredLocation(new Point(-60, 15));

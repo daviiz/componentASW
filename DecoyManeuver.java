@@ -17,6 +17,7 @@ import componentASW.platform.Maneuver_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
+
 /**
  * 
  * @author daiwenzhi
@@ -24,8 +25,8 @@ import view.modeling.ViewableDigraph;
  */
 public class DecoyManeuver extends ViewableDigraph {
 
-	private ViewableAtomic updater,actor;
-	
+	private ViewableAtomic updater, actor;
+
 	// Add Default Constructor
 	public DecoyManeuver() {
 		this("wManeuver_0_0");
@@ -49,8 +50,8 @@ public class DecoyManeuver extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-		 updater = new Maneuver_Updater("updater");
-		 actor = new Maneuver_Actor("actor");
+		updater = new Maneuver_Updater("updater");
+		actor = new Maneuver_Actor("actor");
 
 		// Add sub-components
 		add(updater);
@@ -71,6 +72,7 @@ public class DecoyManeuver extends ViewableDigraph {
 // Structure information end
 		initialize();
 	}
+
 	public void layoutForSimView() {
 		preferredSize = new Dimension(550, 120);
 		((ViewableComponent) withName("updater")).setPreferredLocation(new Point(-60, 15));

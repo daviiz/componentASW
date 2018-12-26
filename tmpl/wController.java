@@ -17,6 +17,7 @@ import componentASW.weapon.Controller_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
+
 /**
  * 
  * @author daiwenzhi
@@ -24,9 +25,9 @@ import view.modeling.ViewableDigraph;
  */
 public class wController extends ViewableDigraph {
 
-	private ViewableAtomic updater ;
+	private ViewableAtomic updater;
 	private ViewableAtomic actor;
-	
+
 	protected double processing_time;
 
 	// Add Default Constructor
@@ -51,29 +52,29 @@ public class wController extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-         updater =  new Controller_Updater("updater");
-         actor =  new Controller_Actor("actor");
+		updater = new Controller_Updater("updater");
+		actor = new Controller_Actor("actor");
 
-        // Add sub-components
-        add(updater);
-        add(actor);
+		// Add sub-components
+		add(updater);
+		add(actor);
 
-        // Add Couplings
-        addCoupling(this,"threat_info",updater,"threat_info");
-        addCoupling(this,"scen_info",updater,"scen_info");
-        addCoupling(this,"scen_info",actor,"scen_info");
-        addCoupling(this,"move_finished",actor,"move_finished");
-        addCoupling(this,"engage_result",actor,"engage_result");
-        addCoupling(this,"wp_guidance",actor,"wp_guidance");
-        
-        addCoupling(updater,"target_info",actor,"target_info");
-        
-        addCoupling(actor,"move_cmd",this,"move_cmd");
-        
-        
+		// Add Couplings
+		addCoupling(this, "threat_info", updater, "threat_info");
+		addCoupling(this, "scen_info", updater, "scen_info");
+		addCoupling(this, "scen_info", actor, "scen_info");
+		addCoupling(this, "move_finished", actor, "move_finished");
+		addCoupling(this, "engage_result", actor, "engage_result");
+		addCoupling(this, "wp_guidance", actor, "wp_guidance");
+
+		addCoupling(updater, "target_info", actor, "target_info");
+
+		addCoupling(actor, "move_cmd", this, "move_cmd");
+
 // Structure information end
 		initialize();
 	}
+
 	public void layoutForSimView() {
 		preferredSize = new Dimension(550, 150);
 		((ViewableComponent) withName("updater")).setPreferredLocation(new Point(-60, 15));

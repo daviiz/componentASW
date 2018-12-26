@@ -11,57 +11,59 @@ package componentASW.ef;
 
 import model.modeling.message;
 import view.modeling.ViewableAtomic;
+
 /**
  * 
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:16:36
  */
-public class Transducer extends ViewableAtomic{
+public class Transducer extends ViewableAtomic {
 
-    protected double processing_time;
+	protected double processing_time;
 
-    // Add Default Constructor
-    public Transducer(){
-        this("Transducer");    }
+	// Add Default Constructor
+	public Transducer() {
+		this("Transducer");
+	}
 
-    // Add Parameterized Constructors
-    public Transducer(String name){
-        super(name);
+	// Add Parameterized Constructors
+	public Transducer(String name) {
+		super(name);
 // Structure information start
-        // Add input port names
-        addInport("engage_result");
+		// Add input port names
+		addInport("engage_result");
 
-        // Add output port names
+		// Add output port names
 
 //add test input ports:
 
 // Structure information end
-        initialize();
-    }
+		initialize();
+	}
 
-    // Add initialize function
-    public void initialize(){
-        super.initialize();
-        phase = "passive";
-        sigma = INFINITY;
-    }
+	// Add initialize function
+	public void initialize() {
+		super.initialize();
+		phase = "passive";
+		sigma = INFINITY;
+	}
 
-    // Add external transition function
-    public void deltext(double e, message x){
-    }
+	// Add external transition function
+	public void deltext(double e, message x) {
+	}
 
-    // Add internal transition function
-    public void deltint(){
-    }
+	// Add internal transition function
+	public void deltint() {
+	}
 
-    // Add confluent function
-    public void deltcon(double e, message x){
-    }
+	// Add confluent function
+	public void deltcon(double e, message x) {
+	}
 
-    // Add output function
-    public message out(){return null;
-    }
+	// Add output function
+	public message out() {
+		return null;
+	}
 
-    // Add Show State function
-    }
-
+	// Add Show State function
+}
