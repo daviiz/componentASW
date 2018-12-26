@@ -24,7 +24,18 @@ import view.modeling.ViewableDigraph;
  */
 public class SimModel extends ViewableDigraph{
 
-    // Add Default Constructor
+	private ViewableDigraph warship ;
+    private ViewableDigraph submarine;
+    
+    private ViewableAtomic enviroment;
+    private  ViewableAtomic damageAssessment;
+    
+    private ViewableDigraph decoy_1;
+    private ViewableDigraph decoy_2;
+    
+    private ViewableDigraph terpedo_1;
+    
+	// Add Default Constructor
     public SimModel(){
         this("simModel_1_1");
     }
@@ -45,18 +56,18 @@ public class SimModel extends ViewableDigraph{
 //add test input ports:
 
         // Initialize sub-components
-        ViewableDigraph warship =  new Platform("warship",0,1000,10);
-        ViewableDigraph submarine =  new Platform("submarine",0,-1000,20);
+         warship =  new Warship("warship",0,1000,10);
+         submarine =  new Submarine("submarine",0,-1000,20);
         
-        ViewableAtomic enviroment =  new Enviroment("enviroment");
-        ViewableAtomic damageAssessment =  new DamageAssessment("damageAssessment");
+         enviroment =  new Enviroment("enviroment");
+         damageAssessment =  new DamageAssessment("damageAssessment");
         
-        ViewableDigraph decoy_1 =  new Weapon("decoy_1",0,0,0);
-        ViewableDigraph decoy_2 =  new Weapon("decoy_2",0,0,0);
+         decoy_1 =  new Decoy("decoy_1",0,0,0);
+         decoy_2 =  new Decoy("decoy_2",0,0,0);
 //        ViewableDigraph decoy_3 =  new Weapon("decoy_3",0,0,0);
 //        ViewableDigraph decoy_4 =  new Weapon("decoy_4",0,0,0);
         
-        ViewableDigraph terpedo_1 =  new Weapon("terpedo_1",0,0,0);
+         terpedo_1 =  new Terpedo("terpedo_1",0,0,0);
         //ViewableDigraph terpedo_2 =  new weapon_1_1("terpedo_2");
 
         // Add sub-components

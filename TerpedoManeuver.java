@@ -22,15 +22,17 @@ import view.modeling.ViewableDigraph;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:40
  */
-public class wManeuver extends ViewableDigraph {
+public class TerpedoManeuver extends ViewableDigraph {
 
+	private ViewableAtomic updater,actor;
+	
 	// Add Default Constructor
-	public wManeuver() {
+	public TerpedoManeuver() {
 		this("wManeuver_0_0");
 	}
 
 	// Add Parameterized Constructors
-	public wManeuver(String name) {
+	public TerpedoManeuver(String name) {
 		super(name);
 // Structure information start
 		// Add input port names
@@ -47,8 +49,8 @@ public class wManeuver extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-		ViewableAtomic updater = new Maneuver_Updater("updater");
-		ViewableAtomic actor = new Maneuver_Actor("actor");
+		 updater = new Maneuver_Updater("updater");
+		 actor = new Maneuver_Actor("actor");
 
 		// Add sub-components
 		add(updater);

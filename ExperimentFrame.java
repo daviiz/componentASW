@@ -25,6 +25,9 @@ import view.modeling.ViewableDigraph;
  */
 public class ExperimentFrame extends ViewableDigraph{
 
+	private ViewableAtomic transducer_1_0 ;
+	private  ViewableAtomic generator_1_0 ;
+	
     // Add Default Constructor
     public ExperimentFrame(){
         this("ExperimentFrame");
@@ -48,8 +51,8 @@ public class ExperimentFrame extends ViewableDigraph{
         addTestInput("wp_launch", new CombatEnt("aaa",0,0,"live",1,1,"sss"));
 
         // Initialize sub-components
-        ViewableAtomic transducer_1_0 =  new Transducer("t");
-        ViewableAtomic generator_1_0 =  new Generator("g");
+         transducer_1_0 =  new Transducer("t");
+         generator_1_0 =  new Generator("g");
 
         // Add sub-components
         add(transducer_1_0);

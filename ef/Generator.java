@@ -55,6 +55,7 @@ public class Generator extends ViewableAtomic{
     // Add external transition function
     public void deltext(double e, message x){
     	Continue(e);
+    	
     	for (int i = 0; i < x.getLength(); i++) {
 			if (messageOnPort(x, "wp_launch", i)) {
 				shipEnt = new CombatEnt((CombatEnt)x.getValOnPort("wp_launch", i));

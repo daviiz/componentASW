@@ -13,7 +13,7 @@ public class OM_WP_Controller {
 	 * @param threatData
 	 * @return
 	 */
-	public static CombatEnt Idntify(List<CombatEnt> threatData) {
+	public static CombatEnt Idntify(CombatEnt threatData) {
 		return null;
 	}
 	/**
@@ -37,5 +37,11 @@ public class OM_WP_Controller {
 	 */
 	public static int Apprch(CombatEnt threatData) {
 		return 0;
+	}
+	/**
+	 * 
+	 */
+	public static void Tacticl_Move() {
+		
 	}
 }

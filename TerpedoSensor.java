@@ -22,16 +22,18 @@ import view.modeling.ViewableDigraph;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:40
  */
-public class pSensor extends ViewableDigraph{
+public class TerpedoSensor extends ViewableDigraph{
 
+	private ViewableAtomic updater,actor;
+	
     protected double processing_time;
 
     // Add Default Constructor
-    public pSensor(){
-        this("pSensor")  ;  }
+    public TerpedoSensor(){
+        this("wSensor")  ;  }
 
     // Add Parameterized Constructors
-    public pSensor(String name){
+    public TerpedoSensor(String name){
         super(name);
 // Structure information start
         // Add input port names
@@ -46,8 +48,8 @@ public class pSensor extends ViewableDigraph{
 //add test input ports:
         
         // Initialize sub-components
-		ViewableAtomic updater = new Sensor_Updater("updater");//收集存储探测信息
-		ViewableAtomic actor = new Sensor_Actor("actor");//提供探测算法
+		 updater = new Sensor_Updater("updater");
+		 actor = new Sensor_Actor("actor");
 		
 		// Add sub-components
 		add(updater);
@@ -57,7 +59,7 @@ public class pSensor extends ViewableDigraph{
 		addCoupling(this, "engage_result", actor, "engage_result");
 		addCoupling(this, "scen_info", actor, "scen_info");
 		addCoupling(this, "env_info", actor, "env_info");
-		addCoupling(this, "move_result", updater, "move_result");//更新平台实体 位置信息
+		addCoupling(this, "move_result", updater, "move_result");
 		
 		
 		addCoupling(updater, "response", actor, "response");
@@ -70,7 +72,7 @@ public class pSensor extends ViewableDigraph{
     }
     public void layoutForSimView() {
 		preferredSize = new Dimension(550, 120);
-		((ViewableComponent) withName("updater")).setPreferredLocation(new Point(-60, 15));
+		((ViewableComponent) withName("updater")).setPreferredLocation(new Point(-80, 15));
 		((ViewableComponent) withName("actor")).setPreferredLocation(new Point(100, 45));
 	}
 

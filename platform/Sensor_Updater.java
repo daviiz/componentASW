@@ -34,7 +34,7 @@ public class Sensor_Updater extends ViewableAtomic {
     // Add initialize function
     public void initialize(){
         super.initialize();
-        phase = "UPDATE";
+        phase = "UPDATE"; // S={ UPDATE REQUEST }
         sigma = INFINITY;
     }
 

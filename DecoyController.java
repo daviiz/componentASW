@@ -22,17 +22,20 @@ import view.modeling.ViewableDigraph;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:40
  */
-public class wController extends ViewableDigraph {
+public class DecoyController extends ViewableDigraph {
 
+	private ViewableAtomic updater ;
+	private ViewableAtomic actor;
+	
 	protected double processing_time;
 
 	// Add Default Constructor
-	public wController() {
+	public DecoyController() {
 		this("wpController");
 	}
 
 	// Add Parameterized Constructors
-	public wController(String name) {
+	public DecoyController(String name) {
 		super(name);
 // Structure information start
 		// Add input port names
@@ -48,8 +51,8 @@ public class wController extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-        ViewableAtomic updater =  new Controller_Updater("updater");
-        ViewableAtomic actor =  new Controller_Actor("actor");
+         updater =  new Controller_Updater("updater");
+         actor =  new Controller_Actor("actor");
 
         // Add sub-components
         add(updater);

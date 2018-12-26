@@ -52,6 +52,7 @@ import view.modeling.ViewableAtomic;
         //S = {IDLE, RECONNNAISSANCE, APPROACH, COMBAT, EVASION, CONTROL, END} 状态集合：{ 空闲-侦查-接近-战斗-逃逸-结束 }
         phase = "IDLE";
         sigma = INFINITY;
+        tRECON = 2;
     }
 
     // Add external transition function
@@ -90,7 +91,7 @@ import view.modeling.ViewableAtomic;
 
     // Add internal transition function
     public void deltint(){
-    	if (phaseIs("RECONNAISSANCE")) {
+    	if (phaseIs("RECONNNAISSANCE")) {
     		
     		holdIn("IDLE",INFINITY);
     		
@@ -120,29 +121,29 @@ import view.modeling.ViewableAtomic;
     // Add output function
     public message out(){
     	message m = new message();
-    	if(phaseIs("RECONNAISSANCE")) {
+    	if(phaseIs("RECONNNAISSANCE")) {
 			//message m = new message();
-			content con = makeContent("move_cmd", new entity(""));
+			content con = makeContent("move_cmd", new entity("move_cmd"));
 			m.add(con);
 			return m;
 		}
     	else if(phaseIs("APPROACH")){
-    		content con = makeContent("move_cmd", new entity(""));
+    		content con = makeContent("move_cmd", new entity("move_cmd"));
 			m.add(con);
     		return m;
 		}
 		else if(phaseIs("COMBAT")){
-			content con = makeContent("wp_launch", new entity(""));
+			content con = makeContent("wp_launch", new entity("wp_launch"));
 			m.add(con);
 			return m;
 		}
 		else if(phaseIs("EVASION")){
-			content con = makeContent("move_cmd", new entity(""));
+			content con = makeContent("move_cmd", new entity("move_cmd"));
 			m.add(con);
 			return m;
 		}
 		else if(phaseIs("CONTROL")){
-			content con = makeContent("wp_guidance", new entity(""));
+			content con = makeContent("wp_guidance", new entity("wp_guidance"));
 			m.add(con);
 			return m;
 		}

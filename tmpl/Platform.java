@@ -7,7 +7,7 @@
 */
 
 // Default Package
-package componentASW;
+package componentASW.tmpl;
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -21,9 +21,15 @@ import view.modeling.ViewableDigraph;
  */
 public class Platform extends ViewableDigraph{
 
-    protected int x;
+    
+	private ViewableDigraph pManeuver ;
+	private ViewableDigraph pController;
+	private ViewableDigraph pSensor ;
+	
+	protected int x;
     protected int y;
     protected int speed;
+    
     
     protected double detect_range = 3000;
 	// Add Default Constructor
@@ -54,9 +60,10 @@ public class Platform extends ViewableDigraph{
 //add test input ports:
 
         // Initialize sub-components
-        ViewableDigraph pManeuver =  new pManeuver("pManeuver");
-        ViewableDigraph pController =  new pController("pController");
-        ViewableDigraph pSensor =  new pSensor("pSensor");
+         pManeuver =  new pManeuver("pManeuver");
+         pController =  new pController("pController");
+         
+         pSensor =  new pSensor("pSensor");
 
         // Add sub-components
         add(pManeuver);
@@ -99,6 +106,62 @@ public class Platform extends ViewableDigraph{
 		((ViewableComponent) withName("pManeuver")).setPreferredLocation(new Point(40, 330));
 		((ViewableComponent) withName("pController")).setPreferredLocation(new Point(20, 165));
 		((ViewableComponent) withName("pSensor")).setPreferredLocation(new Point(0, 15));
+	}
+
+	public ViewableDigraph getpManeuver() {
+		return pManeuver;
+	}
+
+	public void setpManeuver(ViewableDigraph pManeuver) {
+		this.pManeuver = pManeuver;
+	}
+
+	public ViewableDigraph getpController() {
+		return pController;
+	}
+
+	public void setpController(ViewableDigraph pController) {
+		this.pController = pController;
+	}
+
+	public ViewableDigraph getpSensor() {
+		return pSensor;
+	}
+
+	public void setpSensor(ViewableDigraph pSensor) {
+		this.pSensor = pSensor;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public double getDetect_range() {
+		return detect_range;
+	}
+
+	public void setDetect_range(double detect_range) {
+		this.detect_range = detect_range;
 	}
 
     }

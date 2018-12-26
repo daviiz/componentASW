@@ -20,7 +20,9 @@ import view.modeling.ViewableDigraph;
  * @DATATIME 2018年12月25日 下午4:20:33
  */
 public class CombatSysModel extends ViewableDigraph{
-
+	
+	private ViewableDigraph ef_1_1 ;
+	private ViewableDigraph simModel_1_1;
     // Add Default Constructor
     public CombatSysModel(){
         this("CombatSystem");
@@ -38,8 +40,8 @@ public class CombatSysModel extends ViewableDigraph{
 //add test input ports:
 
         // Initialize sub-components
-        ViewableDigraph ef_1_1 =  new ExperimentFrame("f");
-        ViewableDigraph simModel_1_1 =  new SimModel("sim");
+         ef_1_1 =  new ExperimentFrame("f");
+         simModel_1_1 =  new SimModel("sim");
 
         // Add sub-components
         add(ef_1_1);

@@ -19,7 +19,9 @@ import view.modeling.ViewableDigraph;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:40
  */
-public class Weapon extends ViewableDigraph{
+public class Decoy extends ViewableDigraph{
+	
+	 private ViewableDigraph wpManeuver,wpController, wpSensor;
 	
 	protected int x;
     protected int y;
@@ -27,12 +29,12 @@ public class Weapon extends ViewableDigraph{
 	
     
 	// Add Default Constructor
-    public Weapon(){
+    public Decoy(){
         this("weapon",0,0,0);
     }
 
     // Add Parameterized Constructor
-    public Weapon(String name,int x,int y, int speed){
+    public Decoy(String name,int x,int y, int speed){
         super(name);
         this.x = x;
         this.y = y;
@@ -53,9 +55,9 @@ public class Weapon extends ViewableDigraph{
 //add test input ports:
 
         // Initialize sub-components
-        ViewableDigraph wpManeuver =  new wManeuver("wpManeuver");
-        ViewableDigraph wpController =  new wController("wpController");
-        ViewableDigraph wpSensor =  new wSensor("wpSensor");
+         wpManeuver =  new DecoyManeuver("DecoyManeuver");
+         wpController =  new DecoyController("DecoyController");
+         wpSensor =  new DecoySensor("DecoySensor");
 
         // Add sub-components
         add(wpManeuver);
@@ -90,9 +92,9 @@ public class Weapon extends ViewableDigraph{
         }
 		public void layoutForSimView() {
 			preferredSize = new Dimension(790, 500);
-			((ViewableComponent) withName("wpManeuver")).setPreferredLocation(new Point(40, 330));
-			((ViewableComponent) withName("wpController")).setPreferredLocation(new Point(20, 165));
-			((ViewableComponent) withName("wpSensor")).setPreferredLocation(new Point(0, 15));
+			((ViewableComponent) withName("DecoyManeuver")).setPreferredLocation(new Point(40, 330));
+			((ViewableComponent) withName("DecoyController")).setPreferredLocation(new Point(20, 165));
+			((ViewableComponent) withName("DecoySensor")).setPreferredLocation(new Point(0, 15));
 		}
 
     }

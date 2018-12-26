@@ -22,15 +22,18 @@ import view.modeling.ViewableDigraph;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:40
  */
-public class pController extends ViewableDigraph{
+public class SubmarineController extends ViewableDigraph{
 
+	private ViewableAtomic updater ;
+	private ViewableAtomic actor ;
+	
 	// Add Default Constructor
-    public pController(){
+    public SubmarineController(){
         this("pController");
     }
 
     // Add Parameterized Constructor
-    public pController(String name){
+    public SubmarineController(String name){
         super(name);
 
 // Structure information start
@@ -49,8 +52,8 @@ public class pController extends ViewableDigraph{
 //add test input ports:
 
         // Initialize sub-components
-        ViewableAtomic updater =  new Controller_Updater("updater");
-        ViewableAtomic actor =  new Controller_Actor("actor");
+         updater =  new Controller_Updater("updater");
+         actor =  new Controller_Actor("actor");
 
         // Add sub-components
         add(updater);

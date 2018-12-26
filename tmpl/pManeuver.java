@@ -7,7 +7,7 @@
 */
 
 // Default Package
-package componentASW;
+package componentASW.tmpl;
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -23,7 +23,10 @@ import view.modeling.ViewableDigraph;
  * @DATATIME 2018年12月25日 下午4:20:40
  */
 public class pManeuver extends ViewableDigraph {
-
+	
+	private ViewableAtomic updater ;
+	private ViewableAtomic actor ;
+	
 	// Add Default Constructor
 	public pManeuver() {
 		this("pManeuver_0_0");
@@ -47,8 +50,8 @@ public class pManeuver extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-		ViewableAtomic updater = new Maneuver_Updater("updater");
-		ViewableAtomic actor = new Maneuver_Actor("actor");
+		 updater = new Maneuver_Updater("updater");
+		 actor = new Maneuver_Actor("actor");
 
 		// Add sub-components
 		add(updater);
