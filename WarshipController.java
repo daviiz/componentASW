@@ -30,7 +30,7 @@ public class WarshipController extends ViewableDigraph {
 
 	// Add Default Constructor
 	public WarshipController() {
-		this("pController");
+		this("WarshipController");
 	}
 
 	// Add Parameterized Constructor

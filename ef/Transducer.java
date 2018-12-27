@@ -57,8 +57,8 @@ public class Transducer extends ViewableAtomic {
 	}
 
 	// Add confluent function
-	public void deltcon(double e, message x) {
-	}
+//	public void deltcon(double e, message x) {
+//	}
 
 	// Add output function
 	public message out() {

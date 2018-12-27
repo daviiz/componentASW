@@ -7,13 +7,13 @@
 */
 
 // Default Package
-package componentASW.tmpl;
+package componentASW._tmpl;
 
 import java.awt.Dimension;
 import java.awt.Point;
 
-import componentASW.platform.Controller_Actor;
-import componentASW.platform.Controller_Updater;
+import componentASW.weapon.Controller_Actor;
+import componentASW.weapon.Controller_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
@@ -23,32 +23,31 @@ import view.modeling.ViewableDigraph;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:40
  */
-public class pController extends ViewableDigraph {
+public class wController extends ViewableDigraph {
 
 	private ViewableAtomic updater;
 	private ViewableAtomic actor;
 
+	protected double processing_time;
+
 	// Add Default Constructor
-	public pController() {
-		this("pController");
+	public wController() {
+		this("wpController");
 	}
 
-	// Add Parameterized Constructor
-	public pController(String name) {
+	// Add Parameterized Constructors
+	public wController(String name) {
 		super(name);
-
 // Structure information start
 		// Add input port names
 		addInport("move_finished");
-		addInport("engage_result");
-		addInport("scen_info");
 		addInport("threat_info");
-		addInport("guidance_info");
+		addInport("scen_info");
+		addInport("engage_result");
+		addInport("wp_guidance");
 
 		// Add output port names
 		addOutport("move_cmd");
-		addOutport("wp_launch");
-		addOutport("wp_guidance");
 
 //add test input ports:
 
@@ -61,25 +60,23 @@ public class pController extends ViewableDigraph {
 		add(actor);
 
 		// Add Couplings
+		addCoupling(this, "threat_info", updater, "threat_info");
+		addCoupling(this, "scen_info", updater, "scen_info");
+		addCoupling(this, "scen_info", actor, "scen_info");
 		addCoupling(this, "move_finished", actor, "move_finished");
 		addCoupling(this, "engage_result", actor, "engage_result");
-		addCoupling(this, "scen_info", actor, "scen_info");
-		addCoupling(this, "scen_info", updater, "scen_info");
-		addCoupling(this, "threat_info", updater, "threat_info");
-		addCoupling(this, "guidance_info", actor, "guidance_info");
+		addCoupling(this, "wp_guidance", actor, "wp_guidance");
 
 		addCoupling(updater, "target_info", actor, "target_info");
 
 		addCoupling(actor, "move_cmd", this, "move_cmd");
-		addCoupling(actor, "wp_launch", this, "wp_launch");
-		addCoupling(actor, "wp_guidance", this, "wp_guidance");
 
 // Structure information end
 		initialize();
 	}
 
 	public void layoutForSimView() {
-		preferredSize = new Dimension(550, 120);
+		preferredSize = new Dimension(550, 150);
 		((ViewableComponent) withName("updater")).setPreferredLocation(new Point(-60, 15));
 		((ViewableComponent) withName("actor")).setPreferredLocation(new Point(100, 45));
 	}

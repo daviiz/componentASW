@@ -7,7 +7,7 @@
 */
 
 // Default Package
-package componentASW;
+package componentASW._tmpl;
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -20,7 +20,7 @@ import view.modeling.ViewableDigraph;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:40
  */
-public class Terpedo extends ViewableDigraph {
+public class Weapon extends ViewableDigraph {
 
 	private ViewableDigraph wpManeuver, wpController, wpSensor;
 
@@ -29,12 +29,12 @@ public class Terpedo extends ViewableDigraph {
 	protected int speed;
 
 	// Add Default Constructor
-	public Terpedo() {
+	public Weapon() {
 		this("weapon", 0, 0, 0);
 	}
 
 	// Add Parameterized Constructor
-	public Terpedo(String name, int x, int y, int speed) {
+	public Weapon(String name, int x, int y, int speed) {
 		super(name);
 		this.x = x;
 		this.y = y;
@@ -55,9 +55,9 @@ public class Terpedo extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-		wpManeuver = new TerpedoManeuver("TerpedoManeuver");
-		wpController = new TerpedoController("TerpedoController");
-		wpSensor = new TerpedoSensor("TerpedoSensor");
+		wpManeuver = new wManeuver("wpManeuver");
+		wpController = new wController("wpController");
+		wpSensor = new wSensor("wpSensor");
 
 		// Add sub-components
 		add(wpManeuver);
@@ -92,9 +92,9 @@ public class Terpedo extends ViewableDigraph {
 
 	public void layoutForSimView() {
 		preferredSize = new Dimension(790, 500);
-		((ViewableComponent) withName("TerpedoManeuver")).setPreferredLocation(new Point(40, 330));
-		((ViewableComponent) withName("TerpedoController")).setPreferredLocation(new Point(20, 165));
-		((ViewableComponent) withName("TerpedoSensor")).setPreferredLocation(new Point(0, 15));
+		((ViewableComponent) withName("wpManeuver")).setPreferredLocation(new Point(40, 330));
+		((ViewableComponent) withName("wpController")).setPreferredLocation(new Point(20, 165));
+		((ViewableComponent) withName("wpSensor")).setPreferredLocation(new Point(0, 15));
 	}
 
 }

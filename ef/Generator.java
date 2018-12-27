@@ -9,8 +9,8 @@
 // Default Package
 package componentASW.ef;
 
-import GenCol.entity;
 import componentASW.om.CombatEnt;
+import componentASW.om.SimParameter;
 import model.modeling.content;
 import model.modeling.message;
 import view.modeling.ViewableAtomic;
@@ -76,13 +76,24 @@ public class Generator extends ViewableAtomic {
 	public message out() {
 		message m = new message();
 		if (phaseIs("active")) {
-			content con = makeContent("scen_gen", new entity("scen_starting"));
+			content con = makeContent("scen_gen", new CombatEnt(1, "warship", 0, 5000, 1, 1, 0, SimParameter.Speed_Ship, SimParameter.Detection_range_Ship, 999999));
 			m.add(con);
-
-			if (!shipEnt.eq("combatEntBase")) {
-				content con2 = makeContent("entity_gen", shipEnt);
-				m.add(con2);
-			}
+			//new CombatEnt(id, name, x, y, status, belong, _type, speed, detect_range, live_time)
+			content con2 = makeContent("scen_gen", new CombatEnt(2, "submarine", 0, 0, 1,-1, 0, SimParameter.Speed_Submarine, SimParameter.Detection_range_Submarine, 999999));
+			m.add(con2);
+			
+			
+			
+//			content con3 = makeContent("entity_gen", new CombatEnt(SimParameter._ship));
+//			m.add(con3);
+//			
+//			content con4 = makeContent("entity_gen", new CombatEnt(SimParameter._submarine));
+//			m.add(con4);
+			
+//			if (!shipEnt.eq("combatEntBase")) {
+//				content con2 = makeContent("entity_gen", shipEnt);
+//				m.add(con2);
+//			}
 			passivate();
 		}
 		return m;

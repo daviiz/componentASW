@@ -30,7 +30,7 @@ public class WarshipManeuver extends ViewableDigraph {
 
 	// Add Default Constructor
 	public WarshipManeuver() {
-		this("pManeuver_0_0");
+		this("WarshipManeuver");
 	}
 
 	// Add Parameterized Constructors

@@ -15,7 +15,8 @@ public class OM_PF_Controller {
 	 * @return
 	 */
 	public static CombatEnt Identification(CombatEnt threadData) {
-		return threadData;
+		CombatEnt _CombatEnt = new CombatEnt();
+		return _CombatEnt;
 	}
 
 	///// AM_Actor

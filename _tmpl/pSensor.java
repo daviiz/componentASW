@@ -7,13 +7,13 @@
 */
 
 // Default Package
-package componentASW;
+package componentASW._tmpl;
 
 import java.awt.Dimension;
 import java.awt.Point;
 
-import componentASW.platform.Maneuver_Actor;
-import componentASW.platform.Maneuver_Updater;
+import componentASW.platform.Sensor_Actor;
+import componentASW.platform.Sensor_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
@@ -23,51 +23,51 @@ import view.modeling.ViewableDigraph;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:40
  */
-public class TerpedoManeuver extends ViewableDigraph {
+public class pSensor extends ViewableDigraph {
 
-	private ViewableAtomic updater, actor;
+	private ViewableAtomic updater;// 收集存储探测信息
+	private ViewableAtomic actor;// 提供探测算法
+
+	protected double processing_time;
 
 	// Add Default Constructor
-	public TerpedoManeuver() {
-		this("wManeuver_0_0");
+	public pSensor() {
+		this("pSensor");
 	}
 
 	// Add Parameterized Constructors
-	public TerpedoManeuver(String name) {
+	public pSensor(String name) {
 		super(name);
 // Structure information start
 		// Add input port names
+		addInport("move_result");
 		addInport("scen_info");
 		addInport("env_info");
 		addInport("engage_result");
-		addInport("move_cmd");
 
 		// Add output port names
-		addOutport("move_finished");
-		addOutport("move_result");
-		addOutport("fuel_exhausted");
+		addOutport("threat_info");
 
 //add test input ports:
 
 		// Initialize sub-components
-		updater = new Maneuver_Updater("updater");
-		actor = new Maneuver_Actor("actor");
+		updater = new Sensor_Updater("updater");// 收集存储探测信息
+		actor = new Sensor_Actor("actor");// 提供探测算法
 
 		// Add sub-components
 		add(updater);
 		add(actor);
 
 		// Add Couplings
-		addCoupling(this, "move_cmd", updater, "move_cmd");
+		addCoupling(this, "engage_result", actor, "engage_result");
 		addCoupling(this, "scen_info", actor, "scen_info");
 		addCoupling(this, "env_info", actor, "env_info");
-		addCoupling(this, "engage_result", actor, "engage_result");
+		addCoupling(this, "move_result", updater, "move_result");// 更新平台实体 位置信息
 
-		addCoupling(updater, "cmd_info", actor, "cmd_info");
+		addCoupling(updater, "response", actor, "response");
+		addCoupling(actor, "request", updater, "request");
 
-		addCoupling(actor, "move_finished", this, "move_finished");
-		addCoupling(actor, "move_result", this, "move_result");
-		addCoupling(actor, "fuel_exhausted", this, "fuel_exhausted");
+		addCoupling(actor, "threat_info", this, "threat_info");
 
 // Structure information end
 		initialize();

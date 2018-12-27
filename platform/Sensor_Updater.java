@@ -1,5 +1,8 @@
 package componentASW.platform;
 
+import componentASW.om.CombatEnt;
+import componentASW.om.OM_Sensor;
+import model.modeling.content;
 import model.modeling.message;
 import view.modeling.ViewableAtomic;
 
@@ -10,6 +13,14 @@ import view.modeling.ViewableAtomic;
  */
 public class Sensor_Updater extends ViewableAtomic {
 
+	private CombatEnt move_result_ent;
+	
+	private CombatEnt request_ent;
+	
+	private CombatEnt response_ent;
+	
+	private double tREQUEST = 2;
+	
 	// Add Default Constructor
 	public Sensor_Updater() {
 		this("Sensor_Updater");
@@ -37,23 +48,46 @@ public class Sensor_Updater extends ViewableAtomic {
 		super.initialize();
 		phase = "UPDATE"; // S={ UPDATE REQUEST }
 		sigma = INFINITY;
+		tREQUEST = 0;
 	}
 
 	// Add external transition function
 	public void deltext(double e, message x) {
+		Continue(e);
+		move_result_ent = null;
+		request_ent = null;
+		for (int i = 0; i < x.size(); i++) {
+			if (phaseIs("UPDATE")) {
+				if(messageOnPort(x, "move_result", i)) {
+					move_result_ent = (CombatEnt)x.getValOnPort("move_result", i);
+				}else if (messageOnPort(x, "request", i)) {
+					request_ent = new CombatEnt((CombatEnt)x.getValOnPort("request", i));
+					holdIn("REQUEST", tREQUEST);
+				}
+			}
+		}
 	}
 
 	// Add internal transition function
 	public void deltint() {
+		if(phaseIs("REQUEST")) {
+			response_ent = OM_Sensor.Data_Integrator(move_result_ent,request_ent);
+			holdIn("UPDATE", INFINITY);
+		}
 	}
 
 	// Add confluent function
-	public void deltcon(double e, message x) {
-	}
+//	public void deltcon(double e, message x) {
+//	}
 
 	// Add output function
 	public message out() {
-		return null;
+		message m = new message();
+		if (phaseIs("REQUEST")) {
+			content _c = makeContent("response", new CombatEnt(response_ent));
+			m.add(_c);
+		}
+		return m;
 	}
 
 	// Add Show State function

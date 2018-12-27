@@ -14,8 +14,8 @@ public class OM_Maneuver {
 	 * @param Move_order
 	 * @return
 	 */
-	public static CombatEnt Cmd_Inerpreter(String Move_order) {
-		CombatEnt _CombatEnt = null;
+	public static CombatEnt Cmd_Inerpreter(CombatEnt ent) {
+		CombatEnt _CombatEnt = new CombatEnt();
 		return _CombatEnt;
 	}
 
@@ -27,7 +27,8 @@ public class OM_Maneuver {
 	 * @return
 	 */
 	public static CombatEnt Motion_Equation(CombatEnt physical_Data) {
-		return null;
+		CombatEnt _CombatEnt = new CombatEnt();
+		return _CombatEnt;
 	}
 
 	/**

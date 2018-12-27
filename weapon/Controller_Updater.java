@@ -13,7 +13,7 @@ import view.modeling.ViewableAtomic;
  */
 public class Controller_Updater extends ViewableAtomic {
 
-	private double tIDENTIFY;
+	private double tIDENTIFY = 2;
 
 	private CombatEnt _threatInfo;
 
@@ -83,7 +83,7 @@ public class Controller_Updater extends ViewableAtomic {
 	public message out() {
 		message m = new message();
 		if (phaseIs("IDENTIFICATION")) {
-			content c = makeContent("target_info", _threatInfo);
+			content c = makeContent("target_info", new CombatEnt(_threatInfo));
 			m.add(c);
 		}
 		return m;

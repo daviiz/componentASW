@@ -43,12 +43,13 @@ public class Maneuver_Updater extends ViewableAtomic {
 		super.initialize();
 		phase = "WAIT"; // WAIT INTERPRETATION
 		sigma = INFINITY; //
-		currEnt = null;
+		currEnt = new CombatEnt();
 	}
 
 	// Add external transition function
 	public void deltext(double e, message x) {
 		Continue(e);
+		currEnt = null;
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("WAIT")) {
 				holdIn("INTERPRETATION", iINTERPRETATION);
@@ -64,7 +65,7 @@ public class Maneuver_Updater extends ViewableAtomic {
 	public void deltint() {
 		if (phaseIs("INTERPRETATION")) {
 			// execute om function：
-			currEnt = OM_Maneuver.Cmd_Inerpreter(currEnt.getSendorder());
+			currEnt = OM_Maneuver.Cmd_Inerpreter(currEnt);
 
 			holdIn("WAIT", INFINITY);
 		}
@@ -76,14 +77,13 @@ public class Maneuver_Updater extends ViewableAtomic {
 
 	// Add output function
 	public message out() {
+		message m = new message();
 		if (phaseIs("INTERPRETATION")) {
-			message m = new message();
-			content con = makeContent("cmd_info", currEnt);
+			
+			content con = makeContent("cmd_info", new CombatEnt(currEnt));
 			m.add(con);
-			return m;
-		} else {
-			return null;
 		}
+		return m;
 	}
 
 	// Add Show State function

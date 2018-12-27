@@ -7,7 +7,7 @@
 */
 
 // Default Package
-package componentASW.tmpl;
+package componentASW._tmpl;
 
 import java.awt.Dimension;
 import java.awt.Point;

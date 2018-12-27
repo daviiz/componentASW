@@ -1,6 +1,8 @@
 package componentASW.platform;
 
 import GenCol.entity;
+import componentASW.om.CombatEnt;
+import componentASW.om.SimParameter;
 import model.modeling.content;
 import model.modeling.message;
 import view.modeling.ViewableAtomic;
@@ -14,11 +16,11 @@ import view.modeling.ViewableAtomic;
  */
 public class Controller_Actor extends ViewableAtomic {
 
-	private double tRECON;
-	private double tAPPRCH;
-	private double tCOMBAT;
-	private double tEVASION;
-	private double tCTRL;
+	private double tRECON = 10;
+	private double tAPPRCH = 5;
+	private double tCOMBAT = 20;
+	private double tEVASION = 20;
+	private double tCTRL = 15;
 	private double tEND = INFINITY;
 
 	// Add Default Constructor
@@ -126,28 +128,22 @@ public class Controller_Actor extends ViewableAtomic {
 		message m = new message();
 		if (phaseIs("RECONNNAISSANCE")) {
 			// message m = new message();
-			content con = makeContent("move_cmd", new entity("move_cmd"));
+			content con = makeContent("move_cmd", new CombatEnt());
 			m.add(con);
-			return m;
 		} else if (phaseIs("APPROACH")) {
 			content con = makeContent("move_cmd", new entity("move_cmd"));
 			m.add(con);
-			return m;
 		} else if (phaseIs("COMBAT")) {
 			content con = makeContent("wp_launch", new entity("wp_launch"));
 			m.add(con);
-			return m;
 		} else if (phaseIs("EVASION")) {
 			content con = makeContent("move_cmd", new entity("move_cmd"));
 			m.add(con);
-			return m;
 		} else if (phaseIs("CONTROL")) {
 			content con = makeContent("wp_guidance", new entity("wp_guidance"));
 			m.add(con);
-			return m;
-		} else {
-			return null;
-		}
+		} 
+		return m;
 	}
 
 	public void settRECON(double tRECON) {

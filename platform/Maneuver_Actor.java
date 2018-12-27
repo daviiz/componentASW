@@ -14,7 +14,7 @@ import view.modeling.ViewableAtomic;
  */
 public class Maneuver_Actor extends ViewableAtomic {
 
-	private double t_MOVE;
+	private double t_MOVE = 5;
 	private double t_FUEL = 0;
 
 	private CombatEnt cmd_info_ent;
@@ -133,7 +133,7 @@ public class Maneuver_Actor extends ViewableAtomic {
 			content con = makeContent("move_finished", new entity(move_finished + ""));
 			m.add(con);
 
-			content con2 = makeContent("move_result", cmd_info_ent);
+			content con2 = makeContent("move_result", new CombatEnt(cmd_info_ent));
 			m.add(con2);
 		}
 		return m;

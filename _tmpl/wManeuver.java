@@ -7,13 +7,13 @@
 */
 
 // Default Package
-package componentASW.tmpl;
+package componentASW._tmpl;
 
 import java.awt.Dimension;
 import java.awt.Point;
 
-import componentASW.weapon.Controller_Actor;
-import componentASW.weapon.Controller_Updater;
+import componentASW.platform.Maneuver_Actor;
+import componentASW.platform.Maneuver_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
@@ -23,60 +23,58 @@ import view.modeling.ViewableDigraph;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:40
  */
-public class wController extends ViewableDigraph {
+public class wManeuver extends ViewableDigraph {
 
-	private ViewableAtomic updater;
-	private ViewableAtomic actor;
-
-	protected double processing_time;
+	private ViewableAtomic updater, actor;
 
 	// Add Default Constructor
-	public wController() {
-		this("wpController");
+	public wManeuver() {
+		this("wManeuver_0_0");
 	}
 
 	// Add Parameterized Constructors
-	public wController(String name) {
+	public wManeuver(String name) {
 		super(name);
 // Structure information start
 		// Add input port names
-		addInport("move_finished");
-		addInport("threat_info");
 		addInport("scen_info");
+		addInport("env_info");
 		addInport("engage_result");
-		addInport("wp_guidance");
+		addInport("move_cmd");
 
 		// Add output port names
-		addOutport("move_cmd");
+		addOutport("move_finished");
+		addOutport("move_result");
+		addOutport("fuel_exhausted");
 
 //add test input ports:
 
 		// Initialize sub-components
-		updater = new Controller_Updater("updater");
-		actor = new Controller_Actor("actor");
+		updater = new Maneuver_Updater("updater");
+		actor = new Maneuver_Actor("actor");
 
 		// Add sub-components
 		add(updater);
 		add(actor);
 
 		// Add Couplings
-		addCoupling(this, "threat_info", updater, "threat_info");
-		addCoupling(this, "scen_info", updater, "scen_info");
+		addCoupling(this, "move_cmd", updater, "move_cmd");
 		addCoupling(this, "scen_info", actor, "scen_info");
-		addCoupling(this, "move_finished", actor, "move_finished");
+		addCoupling(this, "env_info", actor, "env_info");
 		addCoupling(this, "engage_result", actor, "engage_result");
-		addCoupling(this, "wp_guidance", actor, "wp_guidance");
 
-		addCoupling(updater, "target_info", actor, "target_info");
+		addCoupling(updater, "cmd_info", actor, "cmd_info");
 
-		addCoupling(actor, "move_cmd", this, "move_cmd");
+		addCoupling(actor, "move_finished", this, "move_finished");
+		addCoupling(actor, "move_result", this, "move_result");
+		addCoupling(actor, "fuel_exhausted", this, "fuel_exhausted");
 
 // Structure information end
 		initialize();
 	}
 
 	public void layoutForSimView() {
-		preferredSize = new Dimension(550, 150);
+		preferredSize = new Dimension(550, 120);
 		((ViewableComponent) withName("updater")).setPreferredLocation(new Point(-60, 15));
 		((ViewableComponent) withName("actor")).setPreferredLocation(new Point(100, 45));
 	}

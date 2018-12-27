@@ -18,7 +18,7 @@ import view.modeling.ViewableAtomic;
  */
 public class Controller_Updater extends ViewableAtomic {
 
-	private double tIDNTFY;
+	private double tIDNTFY = 3;
 
 	protected CombatEnt threatInfo;
 
@@ -50,7 +50,7 @@ public class Controller_Updater extends ViewableAtomic {
 		settIDNTFY(2); // 2 sec
 		phase = "WAIT"; // S=WAIT, IDENTIFICATION
 		sigma = INFINITY;
-		tIDNTFY = 120;
+		tIDNTFY = 3;
 	}
 
 	// Add external transition function
@@ -60,7 +60,8 @@ public class Controller_Updater extends ViewableAtomic {
 			if (phaseIs("WAIT")) {
 				// for (int i = 0; i < x.size(); i++) {
 				if (messageOnPort(x, "scen_info", i)) {
-					// do nothing ...
+					//start sim & send massage:
+					
 				} else if (messageOnPort(x, "threat_info", i)) {
 					holdIn("IDENTIFICATION", tIDNTFY);
 				}
@@ -92,14 +93,13 @@ public class Controller_Updater extends ViewableAtomic {
 
 	// Add output function --lambda λ
 	public message out() {
+		message m = new message();
 		if (phaseIs("IDENTIFICATION")) {
-			message m = new message();
-			content con = makeContent("target_info", threatInfo);
+			
+			content con = makeContent("target_info", new CombatEnt(threatInfo));
 			m.add(con);
-			return m;
-		} else {
-			return null;
-		}
+			
+		} return m;
 	}
 
 	public double gettIDNTFY() {

@@ -14,8 +14,8 @@ import view.modeling.ViewableAtomic;
  */
 public class Controller_Actor extends ViewableAtomic {
 
-	private double tAPPRCH;
-	private double tCTRL;
+	private double tAPPRCH = 3;
+	private double tCTRL = 5;
 
 	private entity move_finished_Ent;
 	private CombatEnt target_info_Ent;

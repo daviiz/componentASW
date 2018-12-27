@@ -15,7 +15,8 @@ public class OM_WP_Controller {
 	 * @return
 	 */
 	public static CombatEnt Idntify(CombatEnt threatData) {
-		return null;
+		CombatEnt _CombatEnt = new CombatEnt();
+		return _CombatEnt;
 	}
 
 	/**

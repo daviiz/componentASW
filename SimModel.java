@@ -57,8 +57,8 @@ public class SimModel extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-		warship = new Warship("warship", 0, 1000, 10);
-		submarine = new Submarine("submarine", 0, -1000, 20);
+		warship = new Warship("warship", 0, 5000, 10);
+		submarine = new Submarine("submarine", 0, 0, 20);
 
 		enviroment = new Enviroment("enviroment");
 		damageAssessment = new DamageAssessment("damageAssessment");
@@ -68,7 +68,7 @@ public class SimModel extends ViewableDigraph {
 //        ViewableDigraph decoy_3 =  new Weapon("decoy_3",0,0,0);
 //        ViewableDigraph decoy_4 =  new Weapon("decoy_4",0,0,0);
 
-		terpedo_1 = new Terpedo("terpedo_1", 0, 0, 0);
+		terpedo_1 = new Torpedo("terpedo_1", 0, 0, 0);
 		// ViewableDigraph terpedo_2 = new weapon_1_1("terpedo_2");
 
 		// Add sub-components
