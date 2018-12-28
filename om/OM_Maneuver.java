@@ -15,8 +15,8 @@ public class OM_Maneuver {
 	 * @return
 	 */
 	public static CombatEnt Cmd_Inerpreter(CombatEnt ent) {
-		CombatEnt _CombatEnt = new CombatEnt();
-		return _CombatEnt;
+		//CombatEnt _CombatEnt = new CombatEnt();
+		return ent;
 	}
 
 	/// AM_Actor:

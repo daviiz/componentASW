@@ -77,12 +77,12 @@ public class Generator extends ViewableAtomic {
 		message m = new message();
 		if (phaseIs("active")) {
 			content con = makeContent("scen_gen", new CombatEnt(1, "warship", 0, 5000, 1, 1, 0, SimParameter.Speed_Ship,
-					SimParameter.Detection_range_Ship, 999999));
+					SimParameter.Detection_range_Ship, 999999,"初始化"));
 			m.add(con);
 			// new CombatEnt(id, name, x, y, status, belong, _type, speed, detect_range,
 			// live_time)
 			content con2 = makeContent("scen_gen", new CombatEnt(2, "submarine", 0, 0, 1, -1, 0,
-					SimParameter.Speed_Submarine, SimParameter.Detection_range_Submarine, 999999));
+					SimParameter.Speed_Submarine, SimParameter.Detection_range_Submarine, 999999,"初始化"));
 			m.add(con2);
 
 //			content con3 = makeContent("entity_gen", new CombatEnt(SimParameter._ship));

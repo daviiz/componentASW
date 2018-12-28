@@ -68,8 +68,10 @@ public class SubmarineController_Actor extends ViewableAtomic {
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("IDLE")) {
 				if (messageOnPort(x, "scen_info", i)) {
-					scen_info_ent = new CombatEnt((CombatEnt) x.getValOnPort("scen_info", i));
-					holdIn("RECONNNAISSANCE", tRECON);
+					if (x.getValOnPort("scen_info", i).getName().equals("submarine")) {
+						scen_info_ent = new CombatEnt((CombatEnt) x.getValOnPort("scen_info", i));
+						holdIn("RECONNNAISSANCE", tRECON);
+					}
 				} else if (messageOnPort(x, "move_finished", i)) {
 					holdIn("RECONNNAISSANCE", tRECON);
 				} else if (messageOnPort(x, "target_info", i)) {
@@ -131,7 +133,8 @@ public class SubmarineController_Actor extends ViewableAtomic {
 		message m = new message();
 		if (phaseIs("RECONNNAISSANCE")) {
 			// message m = new message();
-			content con = makeContent("move_cmd", new CombatEnt());
+			scen_info_ent.setOrderStr("move_cmd");
+			content con = makeContent("move_cmd", new CombatEnt(scen_info_ent));
 			m.add(con);
 		} else if (phaseIs("APPROACH")) {
 			content con = makeContent("move_cmd", new entity("move_cmd"));

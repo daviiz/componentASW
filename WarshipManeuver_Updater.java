@@ -49,9 +49,12 @@ public class WarshipManeuver_Updater extends ViewableAtomic {
 	// Add external transition function
 	public void deltext(double e, message x) {
 		Continue(e);
-		currEnt = null;
+		currEnt = new CombatEnt();
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("WAIT")) {
+				if (messageOnPort(x, "move_cmd", i)) {
+					currEnt = new CombatEnt((CombatEnt) x.getValOnPort("move_cmd", i));
+				}
 				holdIn("INTERPRETATION", iINTERPRETATION);
 			} else if (phaseIs("INTERPRETATION")) {
 				if (messageOnPort(x, "move_cmd", i)) {
@@ -78,7 +81,7 @@ public class WarshipManeuver_Updater extends ViewableAtomic {
 	// Add output function
 	public message out() {
 		message m = new message();
-		if (phaseIs("INTERPRETATION")) {
+		if (phaseIs("INTERPRETATION")&& currEnt.eq("warship")) {
 
 			content con = makeContent("cmd_info", new CombatEnt(currEnt));
 			m.add(con);

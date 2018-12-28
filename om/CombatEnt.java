@@ -27,6 +27,8 @@ public class CombatEnt extends GenCol.entity {
 	private int detect_range;
 	// 生命周期
 	private int live_time;
+	// 当前端口指令
+	private String orderStr;
 
 	public CombatEnt() {
 		this.id = 0;
@@ -46,10 +48,11 @@ public class CombatEnt extends GenCol.entity {
 		this.speed = ent.speed;
 		this.detect_range = ent.detect_range;
 		this.live_time = ent.live_time;
+		this.orderStr  = ent.orderStr;
 	}
 
 	public CombatEnt(int id, String name, int x, int y, int status, int belong, int _type, int speed, int detect_range,
-			int live_time) {
+			int live_time,String _order) {
 		this.name = name;
 		this.status = status;
 		this.x = x;
@@ -59,6 +62,7 @@ public class CombatEnt extends GenCol.entity {
 		this.speed = speed;
 		this.detect_range = detect_range;
 		this.live_time = live_time;
+		this.orderStr = _order;
 	}
 
 	public boolean eq(String nm) {
@@ -85,7 +89,7 @@ public class CombatEnt extends GenCol.entity {
 
 	public String toString() {
 
-		return ("name:" + name + "Loc:(" + x + "," + y + ")");
+		return ("实体:" + name + ",位置:(" + x + "," + y + "),指令:"+orderStr);
 	}
 
 	public int getId() {
@@ -158,6 +162,14 @@ public class CombatEnt extends GenCol.entity {
 
 	public void setLive_time(int live_time) {
 		this.live_time = live_time;
+	}
+
+	public String getOrderStr() {
+		return orderStr;
+	}
+
+	public void setOrderStr(String orderStr) {
+		this.orderStr = orderStr;
 	}
 
 }
