@@ -14,7 +14,7 @@ import view.modeling.ViewableAtomic;
  */
 public class WarshipManeuver_Actor extends ViewableAtomic {
 
-	private double t_MOVE = 5;
+	private double t_MOVE = 2;
 	private double t_FUEL = 0;
 
 	private CombatEnt cmd_info_ent;

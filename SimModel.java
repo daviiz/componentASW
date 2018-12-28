@@ -150,6 +150,9 @@ public class SimModel extends ViewableDigraph {
 		addCoupling(terpedo_1, "move_result", warship, "move_result");
 
 		addCoupling(terpedo_1, "guidance_info", warship, "guidance_info");
+		
+		addCoupling(submarine, "move_result", warship, "move_result");
+		addCoupling(warship , "move_result", submarine, "move_result");
 
 // Structure information end
 		initialize();

@@ -11,7 +11,9 @@ package componentASW;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.ArrayList;
 
+import componentASW.om.CombatEnt;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
@@ -26,6 +28,8 @@ public class WarshipSensor extends ViewableDigraph {
 	private ViewableAtomic updater;// 收集存储探测信息
 	private ViewableAtomic actor;// 提供探测算法
 
+	
+	
 	// Add Default Constructor
 	public WarshipSensor() {
 		this("WarshipSensor");

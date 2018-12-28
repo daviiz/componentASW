@@ -18,7 +18,7 @@ public class TorpedoSensor_Actor extends ViewableAtomic {
 
 	private entity engage_result_ent;
 
-	private CombatEnt responseEntity;
+	private entity responseEntity;
 
 	private CombatEnt track_info_ent;
 
@@ -78,7 +78,7 @@ public class TorpedoSensor_Actor extends ViewableAtomic {
 				}
 			} else if (phaseIs("REQUEST")) {
 				if (messageOnPort(x, "response", i)) {
-					responseEntity = new CombatEnt((CombatEnt) x.getValOnPort("response", i));
+					responseEntity = x.getValOnPort("response", i);
 					holdIn("DETECT", 0);
 				} else if (messageOnPort(x, "env_info", i)) {
 					holdIn("REQUEST", INFINITY);
@@ -91,7 +91,7 @@ public class TorpedoSensor_Actor extends ViewableAtomic {
 	// Add internal transition function
 	public void deltint() {
 		if (phaseIs("DETECT")) {
-			track_info_ent = OM_Sensor.Detection_Algorithm(responseEntity);
+			track_info_ent = OM_Sensor.Detection_Algorithm("torpedo");
 			holdIn("PERIOD", tCYCLE);
 
 		} else if (phaseIs("PERIOD")) {
@@ -112,7 +112,7 @@ public class TorpedoSensor_Actor extends ViewableAtomic {
 		} else if (phaseIs("PERIOD")) {
 			// content _cContent = makeContent("threat_info", new
 			// CombatEnt(responseEntity));
-			content _cContent = makeContent("threat_info", new CombatEnt());
+			content _cContent = makeContent("request", new entity("request"));
 			m.add(_cContent);
 		}
 		return m;

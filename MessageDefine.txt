@@ -1,0 +1,15 @@
+消息定义：
+
+WarshipController_Actor
+Inport:
+	move_finished : true / fase  完成/失败
+	engage_result ：true / false 成功防御鱼类攻击/防御失败
+	scen_info ：类型为：CombatEnt，战舰实体初始化数据消息
+	target_info ： 类型为：CombatEnt，接收到的蓝方鱼雷实体的消息
+	guidance_info ： 类型为：CombatEnt，释放的鱼雷诱饵的实体消息 
+
+Outport:
+	wp_launch ；释放鱼雷指令 ：true / false
+	move_cmd  : 类型为：CombatEnt,战舰实时状态数据传递到WarshipManeuver中
+	wp_guidance ：控制鱼雷诱饵指令，简化处理 "wp_guidance"
+	

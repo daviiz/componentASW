@@ -59,7 +59,10 @@ public class TorpedoSensor_Updater extends ViewableAtomic {
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("UPDATE")) {
 				if (messageOnPort(x, "move_result", i)) {
-					move_result_ent = (CombatEnt) x.getValOnPort("move_result", i);
+					if(x.getValOnPort("move_result", i).eq("torpedo")) {
+						move_result_ent = (CombatEnt) x.getValOnPort("move_result", i);
+					}
+					OM_Sensor.Data_Integrator(move_result_ent);
 				} else if (messageOnPort(x, "request", i)) {
 					request_ent = new CombatEnt((CombatEnt) x.getValOnPort("request", i));
 					holdIn("REQUEST", tREQUEST);
@@ -71,7 +74,6 @@ public class TorpedoSensor_Updater extends ViewableAtomic {
 	// Add internal transition function
 	public void deltint() {
 		if (phaseIs("REQUEST")) {
-			response_ent = OM_Sensor.Data_Integrator(move_result_ent, request_ent);
 			holdIn("UPDATE", INFINITY);
 		}
 	}

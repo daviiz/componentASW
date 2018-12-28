@@ -70,7 +70,7 @@ public class Warship extends ViewableDigraph {
 		add(pSensor);
 
 		// Add Couplings
-
+		//EIC:
 		addCoupling(this, "engage_result", pController, "engage_result");
 		addCoupling(this, "engage_result", pManeuver, "engage_result");
 		addCoupling(this, "engage_result", pSensor, "engage_result");
@@ -78,22 +78,23 @@ public class Warship extends ViewableDigraph {
 		addCoupling(this, "env_info", pSensor, "env_info");
 		addCoupling(this, "guidance_info", pController, "guidance_info");
 		addCoupling(this, "move_result", pSensor, "move_result");
-		addCoupling(this, "move_result", pManeuver, "move_result");
+		//addCoupling(this, "move_result", pManeuver, "move_result");
 		addCoupling(this, "scen_info", pController, "scen_info");
 		addCoupling(this, "scen_info", pManeuver, "scen_info");
 		addCoupling(this, "scen_info", pSensor, "scen_info");
-		addCoupling(this, "wp_guidance", pController, "wp_guidance");
+		//addCoupling(this, "wp_guidance", pController, "wp_guidance");
 		addCoupling(this, "wp_launch", pController, "wp_launch");
-
+		
+		//IC:
 		addCoupling(pSensor, "threat_info", pController, "threat_info");
-
 		addCoupling(pController, "move_cmd", pManeuver, "move_cmd");
-		addCoupling(pController, "wp_launch", this, "wp_launch");
-		addCoupling(pController, "wp_guidance", this, "wp_guidance");
-
 		addCoupling(pManeuver, "fuel_exhausted", pController, "engage_result");
 		addCoupling(pManeuver, "fuel_exhausted", pSensor, "engage_result");
 		addCoupling(pManeuver, "move_finished", pController, "move_finished");
+		
+		//IOC:
+		addCoupling(pController, "wp_launch", this, "wp_launch");
+		addCoupling(pController, "wp_guidance", this, "wp_guidance");
 		addCoupling(pManeuver, "move_result", this, "move_result");
 
 // Structure information end

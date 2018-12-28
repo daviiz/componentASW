@@ -2,6 +2,7 @@ package componentASW;
 
 import GenCol.entity;
 import componentASW.om.CombatEnt;
+import componentASW.om.OM_PF_Controller;
 import model.modeling.content;
 import model.modeling.message;
 import view.modeling.ViewableAtomic;
@@ -22,8 +23,15 @@ public class WarshipController_Actor extends ViewableAtomic {
 	private double tCTRL = 15;
 	private double tEND = INFINITY;
 
-	private CombatEnt scen_info_ent;
-
+	private CombatEnt scen_info_ent; // 战舰实体状态信息
+	
+	
+	
+	private entity move_finished_ent;
+	private entity engage_result_ent;
+	private CombatEnt target_info_ent;
+	private CombatEnt guidance_info_ent;
+	
 	// Add Default Constructor
 	public WarshipController_Actor() {
 		this("Controller_Actor");
@@ -58,8 +66,12 @@ public class WarshipController_Actor extends ViewableAtomic {
 		// 空闲-侦查-接近-战斗-逃逸-结束 }
 		phase = "IDLE";
 		sigma = INFINITY;
-		tRECON = 2;
+		
 		scen_info_ent = new CombatEnt();
+		move_finished_ent = new entity();
+		target_info_ent = new CombatEnt();
+		engage_result_ent = new entity();
+		guidance_info_ent = new CombatEnt();
 	}
 
 	// Add external transition function
@@ -73,26 +85,34 @@ public class WarshipController_Actor extends ViewableAtomic {
 						holdIn("RECONNNAISSANCE", tRECON);
 					}
 				} else if (messageOnPort(x, "move_finished", i)) {
+					move_finished_ent = x.getValOnPort("move_finished", i);
 					holdIn("RECONNNAISSANCE", tRECON);
 				} else if (messageOnPort(x, "target_info", i)) {
+					target_info_ent =  new CombatEnt((CombatEnt)x.getValOnPort("target_info", i));
 					holdIn("APPROACH", tAPPRCH);
 				} else if (messageOnPort(x, "guidance_info", i)) {
+					guidance_info_ent = new CombatEnt((CombatEnt)x.getValOnPort("guidance_info", i));
 					holdIn("CONTROL", tCTRL);
 				} else if (messageOnPort(x, "engage_result", i)) {
+					engage_result_ent = x.getValOnPort("engage_result", i);
 					holdIn("END", INFINITY);
 				}
 			} else if (phaseIs("COMBAT")) {
 				if (messageOnPort(x, "target_info", i)) {
+					target_info_ent =  new CombatEnt((CombatEnt)x.getValOnPort("target_info", i));
 					holdIn("COMBAT", tCOMBAT);
 				}
 			} else if (phaseIs("CONTROL")) {
 				if (messageOnPort(x, "target_info", i)) {
+					target_info_ent =  new CombatEnt((CombatEnt)x.getValOnPort("target_info", i));
 					holdIn("CONTROL", tCTRL);
 				} else if (messageOnPort(x, "engage_result", i)) {
+					engage_result_ent = x.getValOnPort("engage_result", i);
 					holdIn("END", INFINITY);
 				}
 			} else if (phaseIs("EVASION")) {
 				if (messageOnPort(x, "target_info", i)) {
+					target_info_ent =  new CombatEnt((CombatEnt)x.getValOnPort("target_info", i));
 					holdIn("EVASION", tEVASION);
 				}
 			}
@@ -102,11 +122,11 @@ public class WarshipController_Actor extends ViewableAtomic {
 	// Add internal transition function
 	public void deltint() {
 		if (phaseIs("RECONNNAISSANCE")) {
-
+			scen_info_ent = OM_PF_Controller.Recon(0,scen_info_ent);
 			holdIn("IDLE", INFINITY);
 
 		} else if (phaseIs("APPROACH")) {
-
+			
 			holdIn("IDLE", INFINITY);
 			// ?红蓝区分吗?
 			// holdIn("COMBAT",tCOMBAT);
@@ -137,13 +157,15 @@ public class WarshipController_Actor extends ViewableAtomic {
 			content con = makeContent("move_cmd", new CombatEnt(scen_info_ent));
 			m.add(con);
 		} else if (phaseIs("APPROACH")) {
-			content con = makeContent("move_cmd", new entity("move_cmd"));
+			scen_info_ent.setOrderStr("move_cmd");
+			content con = makeContent("move_cmd", new CombatEnt(scen_info_ent));
 			m.add(con);
 		} else if (phaseIs("COMBAT")) {
-			content con = makeContent("wp_launch", new entity("wp_launch"));
+			content con = makeContent("wp_launch", new entity("true"));
 			m.add(con);
 		} else if (phaseIs("EVASION")) {
-			content con = makeContent("move_cmd", new entity("move_cmd"));
+			scen_info_ent.setOrderStr("move_cmd");
+			content con = makeContent("move_cmd", new CombatEnt(scen_info_ent));
 			m.add(con);
 		} else if (phaseIs("CONTROL")) {
 			content con = makeContent("wp_guidance", new entity("wp_guidance"));
