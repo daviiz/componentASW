@@ -1,4 +1,4 @@
-package componentASW.platform;
+package componentASW._tmpl.platform;
 
 import componentASW.om.CombatEnt;
 import componentASW.om.OM_PF_Controller;

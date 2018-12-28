@@ -1,4 +1,4 @@
-package componentASW.weapon;
+package componentASW;
 
 import componentASW.om.CombatEnt;
 import componentASW.om.OM_WP_Controller;
@@ -11,19 +11,19 @@ import view.modeling.ViewableAtomic;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:25
  */
-public class Controller_Updater extends ViewableAtomic {
+public class TorpedoController_Updater extends ViewableAtomic {
 
 	private double tIDENTIFY = 2;
 
 	private CombatEnt _threatInfo;
 
 	// Add Default Constructor
-	public Controller_Updater() {
+	public TorpedoController_Updater() {
 		this("wpController_Updater");
 	}
 
 	// Add Parameterized Constructors
-	public Controller_Updater(String name) {
+	public TorpedoController_Updater(String name) {
 		super(name);
 // Structure information start
 		// Add input port names

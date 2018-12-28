@@ -1,8 +1,7 @@
-package componentASW.platform;
+package componentASW;
 
 import GenCol.entity;
 import componentASW.om.CombatEnt;
-import componentASW.om.SimParameter;
 import model.modeling.content;
 import model.modeling.message;
 import view.modeling.ViewableAtomic;
@@ -14,7 +13,7 @@ import view.modeling.ViewableAtomic;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:18:44
  */
-public class Controller_Actor extends ViewableAtomic {
+public class SubmarineController_Actor extends ViewableAtomic {
 
 	private double tRECON = 10;
 	private double tAPPRCH = 5;
@@ -23,13 +22,15 @@ public class Controller_Actor extends ViewableAtomic {
 	private double tCTRL = 15;
 	private double tEND = INFINITY;
 
+	private CombatEnt scen_info_ent;
+
 	// Add Default Constructor
-	public Controller_Actor() {
+	public SubmarineController_Actor() {
 		this("Controller_Actor");
 	}
 
 	// Add Parameterized Constructors
-	public Controller_Actor(String name) {
+	public SubmarineController_Actor(String name) {
 		super(name);
 // Structure information start
 		// Add input port names
@@ -58,6 +59,7 @@ public class Controller_Actor extends ViewableAtomic {
 		phase = "IDLE";
 		sigma = INFINITY;
 		tRECON = 2;
+		scen_info_ent = new CombatEnt();
 	}
 
 	// Add external transition function
@@ -66,6 +68,7 @@ public class Controller_Actor extends ViewableAtomic {
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("IDLE")) {
 				if (messageOnPort(x, "scen_info", i)) {
+					scen_info_ent = new CombatEnt((CombatEnt) x.getValOnPort("scen_info", i));
 					holdIn("RECONNNAISSANCE", tRECON);
 				} else if (messageOnPort(x, "move_finished", i)) {
 					holdIn("RECONNNAISSANCE", tRECON);
@@ -142,7 +145,7 @@ public class Controller_Actor extends ViewableAtomic {
 		} else if (phaseIs("CONTROL")) {
 			content con = makeContent("wp_guidance", new entity("wp_guidance"));
 			m.add(con);
-		} 
+		}
 		return m;
 	}
 

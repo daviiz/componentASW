@@ -12,8 +12,6 @@ package componentASW;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import componentASW.weapon.Controller_Actor;
-import componentASW.weapon.Controller_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
@@ -52,8 +50,8 @@ public class TorpedoController extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-		updater = new Controller_Updater("updater");
-		actor = new Controller_Actor("actor");
+		updater = new TorpedoController_Updater("updater");
+		actor = new TorpedoController_Actor("actor");
 
 		// Add sub-components
 		add(updater);

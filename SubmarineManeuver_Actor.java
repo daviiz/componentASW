@@ -1,4 +1,4 @@
-package componentASW.platform;
+package componentASW;
 
 import GenCol.entity;
 import componentASW.om.CombatEnt;
@@ -12,7 +12,7 @@ import view.modeling.ViewableAtomic;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:19:36
  */
-public class Maneuver_Actor extends ViewableAtomic {
+public class SubmarineManeuver_Actor extends ViewableAtomic {
 
 	private double t_MOVE = 5;
 	private double t_FUEL = 0;
@@ -30,12 +30,12 @@ public class Maneuver_Actor extends ViewableAtomic {
 	private boolean fuel_exhausted;
 
 	// Add Default Constructor
-	public Maneuver_Actor() {
+	public SubmarineManeuver_Actor() {
 		this("Maneuver_Actor");
 	}
 
 	// Add Parameterized Constructors
-	public Maneuver_Actor(String name) {
+	public SubmarineManeuver_Actor(String name) {
 		super(name);
 // Structure information start
 		// Add input port names

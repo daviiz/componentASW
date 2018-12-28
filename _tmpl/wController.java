@@ -12,8 +12,8 @@ package componentASW._tmpl;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import componentASW.weapon.Controller_Actor;
-import componentASW.weapon.Controller_Updater;
+import componentASW._tmpl.weapon.Controller_Actor;
+import componentASW._tmpl.weapon.Controller_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;

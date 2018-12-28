@@ -7,9 +7,8 @@ package componentASW.om;
  */
 public class SimParameter {
 
-
 	/// Surface ship:
-	
+
 	/**
 	 * (m) The volume of the surface ship .
 	 */
@@ -19,7 +18,7 @@ public class SimParameter {
 	 * (knts) ,The movement speed of the surface ship. 1 Knot = 0.51444444 Meters
 	 * per Second.
 	 */
-	public static int Speed_Ship = (int) (15*0.514);
+	public static int Speed_Ship = (int) (15 * 0.514);
 
 	/**
 	 * (degree/s) The revolution angle per second of the surface ship.
@@ -66,7 +65,7 @@ public class SimParameter {
 	 * (knts) Low speed:18, Middle speed:23, High speed:35, The different speed is
 	 * applied according to the pattern of torpedo movement.
 	 */
-	public static int Speed_Torpedo = (int)(35*0.514);
+	public static int Speed_Torpedo = (int) (35 * 0.514);
 
 	/// Submarine:
 	/**
@@ -77,7 +76,7 @@ public class SimParameter {
 	/**
 	 * (knts) The movement speed of the submarine.
 	 */
-	public static int Speed_Submarine = (int)(12*0.514);
+	public static int Speed_Submarine = (int) (12 * 0.514);
 
 	/**
 	 * (degree/s) The revolution angle per second of the submarine.
@@ -104,7 +103,7 @@ public class SimParameter {
 	/**
 	 * (knts) The speed of the mobile decoys
 	 */
-	public static int Speed_of_decoy = (int)(12*0.514);
+	public static int Speed_of_decoy = (int) (12 * 0.514);
 
 	/**
 	 * (%) The probability of working normally (influenced by the random variable).

@@ -12,8 +12,6 @@ package componentASW;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import componentASW.platform.Sensor_Actor;
-import componentASW.platform.Sensor_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
@@ -50,8 +48,8 @@ public class TorpedoSensor extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-		updater = new Sensor_Updater("updater");
-		actor = new Sensor_Actor("actor");
+		updater = new TorpedoSensor_Updater("updater");
+		actor = new TorpedoSensor_Actor("actor");
 
 		// Add sub-components
 		add(updater);

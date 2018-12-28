@@ -12,8 +12,6 @@ package componentASW;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import componentASW.platform.Controller_Actor;
-import componentASW.platform.Controller_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
@@ -53,8 +51,8 @@ public class SubmarineController extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-		updater = new Controller_Updater("updater");
-		actor = new Controller_Actor("actor");
+		updater = new SubmarineController_Updater("updater");
+		actor = new SubmarineController_Actor("actor");
 
 		// Add sub-components
 		add(updater);

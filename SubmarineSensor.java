@@ -12,8 +12,6 @@ package componentASW;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import componentASW.platform.Sensor_Actor;
-import componentASW.platform.Sensor_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
@@ -49,8 +47,8 @@ public class SubmarineSensor extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-		updater = new Sensor_Updater("updater");// 收集存储探测信息
-		actor = new Sensor_Actor("actor");// 提供探测算法
+		updater = new SubmarineSensor_Updater("updater");// 收集存储探测信息
+		actor = new SubmarineSensor_Actor("actor");// 提供探测算法
 
 		// Add sub-components
 		add(updater);

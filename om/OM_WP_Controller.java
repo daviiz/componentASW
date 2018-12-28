@@ -1,7 +1,5 @@
 package componentASW.om;
 
-import java.util.List;
-
 /**
  * 
  * @author daiwenzhi

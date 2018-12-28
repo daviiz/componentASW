@@ -12,8 +12,6 @@ package componentASW;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import componentASW.platform.Maneuver_Actor;
-import componentASW.platform.Maneuver_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;
@@ -50,8 +48,8 @@ public class DecoyManeuver extends ViewableDigraph {
 //add test input ports:
 
 		// Initialize sub-components
-		updater = new Maneuver_Updater("updater");
-		actor = new Maneuver_Actor("actor");
+		updater = new DecoyManeuver_Updater("updater");
+		actor = new DecoyManeuver_Actor("actor");
 
 		// Add sub-components
 		add(updater);

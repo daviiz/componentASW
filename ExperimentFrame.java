@@ -48,7 +48,7 @@ public class ExperimentFrame extends ViewableDigraph {
 
 //add test input ports:
 		// String name,int x,int y,String status,int belong,int _type,String sendorder
-		//addTestInput("wp_launch", new CombatEnt("aaa", 0, 0, "live", 1, 1, "sss"));
+		// addTestInput("wp_launch", new CombatEnt("aaa", 0, 0, "live", 1, 1, "sss"));
 
 		// Initialize sub-components
 		transducer_1_0 = new Transducer("t");

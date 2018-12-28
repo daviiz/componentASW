@@ -60,7 +60,7 @@ public class Enviroment extends ViewableAtomic {
 
 	// Add output function
 	public message out() {
-		message m=new message();
+		message m = new message();
 		return m;
 	}
 

@@ -1,4 +1,4 @@
-package componentASW.platform;
+package componentASW;
 
 import componentASW.om.CombatEnt;
 import componentASW.om.OM_Sensor;
@@ -11,23 +11,23 @@ import view.modeling.ViewableAtomic;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:19:54
  */
-public class Sensor_Updater extends ViewableAtomic {
+public class SubmarineSensor_Updater extends ViewableAtomic {
 
 	private CombatEnt move_result_ent;
-	
+
 	private CombatEnt request_ent;
-	
+
 	private CombatEnt response_ent;
-	
+
 	private double tREQUEST = 2;
-	
+
 	// Add Default Constructor
-	public Sensor_Updater() {
+	public SubmarineSensor_Updater() {
 		this("Sensor_Updater");
 	}
 
 	// Add Parameterized Constructors
-	public Sensor_Updater(String name) {
+	public SubmarineSensor_Updater(String name) {
 		super(name);
 // Structure information start
 		// Add input port names
@@ -58,10 +58,10 @@ public class Sensor_Updater extends ViewableAtomic {
 		request_ent = null;
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("UPDATE")) {
-				if(messageOnPort(x, "move_result", i)) {
-					move_result_ent = (CombatEnt)x.getValOnPort("move_result", i);
-				}else if (messageOnPort(x, "request", i)) {
-					request_ent = new CombatEnt((CombatEnt)x.getValOnPort("request", i));
+				if (messageOnPort(x, "move_result", i)) {
+					move_result_ent = (CombatEnt) x.getValOnPort("move_result", i);
+				} else if (messageOnPort(x, "request", i)) {
+					request_ent = new CombatEnt((CombatEnt) x.getValOnPort("request", i));
 					holdIn("REQUEST", tREQUEST);
 				}
 			}
@@ -70,8 +70,8 @@ public class Sensor_Updater extends ViewableAtomic {
 
 	// Add internal transition function
 	public void deltint() {
-		if(phaseIs("REQUEST")) {
-			response_ent = OM_Sensor.Data_Integrator(move_result_ent,request_ent);
+		if (phaseIs("REQUEST")) {
+			response_ent = OM_Sensor.Data_Integrator(move_result_ent, request_ent);
 			holdIn("UPDATE", INFINITY);
 		}
 	}

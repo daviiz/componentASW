@@ -1,4 +1,4 @@
-package componentASW.weapon;
+package componentASW;
 
 import GenCol.entity;
 import componentASW.om.CombatEnt;
@@ -12,7 +12,7 @@ import view.modeling.ViewableAtomic;
  * @author daiwenzhi
  * @DATATIME 2018年12月25日 下午4:20:20
  */
-public class Controller_Actor extends ViewableAtomic {
+public class DecoyController_Actor extends ViewableAtomic {
 
 	private double tAPPRCH = 3;
 	private double tCTRL = 5;
@@ -23,12 +23,12 @@ public class Controller_Actor extends ViewableAtomic {
 	private entity engage_result_Ent;
 
 	// Add Default Constructor
-	public Controller_Actor() {
+	public DecoyController_Actor() {
 		this("wpController_Actor");
 	}
 
 	// Add Parameterized Constructors
-	public Controller_Actor(String name) {
+	public DecoyController_Actor(String name) {
 		super(name);
 // Structure information start
 		// Add input port names

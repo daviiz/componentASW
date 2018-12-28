@@ -9,23 +9,23 @@ import GenCol.ExternalRepresentation;
  * @DATATIME 2018年12月25日 下午4:17:52
  */
 public class CombatEnt extends GenCol.entity {
-	
-	//实体消息主键
+
+	// 实体消息主键
 	private int id;
-	//位置信息
+	// 位置信息
 	protected int x;
 	protected int y;
-	//实体状态
-	private int status; //1"live" 0"destroyed"
-	//属方
+	// 实体状态
+	private int status; // 1"live" 0"destroyed"
+	// 属方
 	private int belong; // 1 红方,0 中立方,-1 蓝方
-	//实体类型
+	// 实体类型
 	private int _type; // 0:platform, 1:weapon,-1 未定义
-	//实体速度
+	// 实体速度
 	private int speed;
-	//侦查范围
+	// 侦查范围
 	private int detect_range;
-	//生命周期
+	// 生命周期
 	private int live_time;
 
 	public CombatEnt() {
@@ -48,7 +48,8 @@ public class CombatEnt extends GenCol.entity {
 		this.live_time = ent.live_time;
 	}
 
-	public CombatEnt(int id,String name, int x, int y, int status, int belong, int _type, int speed, int detect_range,int live_time) {
+	public CombatEnt(int id, String name, int x, int y, int status, int belong, int _type, int speed, int detect_range,
+			int live_time) {
 		this.name = name;
 		this.status = status;
 		this.x = x;
@@ -159,16 +160,17 @@ public class CombatEnt extends GenCol.entity {
 		this.live_time = live_time;
 	}
 
-
 }
 /**
-	content con3 = makeContent("scen_gen", new CombatEnt(3, "Decoy1", 0, 0,1,1,1, SimParameter.Speed_of_decoy, 0, SimParameter.Operation_time_Decoy));
-	m.add(con3);
-	
-	content con4 = makeContent("scen_gen", new CombatEnt(4, "Decoy2", 0, 0,1,1,1, SimParameter.Speed_of_decoy, 0, SimParameter.Operation_time_Decoy));
-	m.add(con4);
-	
-	content con5 = makeContent("scen_gen", new CombatEnt(5, "Terpedp", 0, 0,1,-1,1, SimParameter.Speed_Torpedo, 0, SimParameter.Live_time_Torpedo));
-	m.add(con5);
+ * content con3 = makeContent("scen_gen", new CombatEnt(3, "Decoy1", 0, 0,1,1,1,
+ * SimParameter.Speed_of_decoy, 0, SimParameter.Operation_time_Decoy));
+ * m.add(con3);
+ * 
+ * content con4 = makeContent("scen_gen", new CombatEnt(4, "Decoy2", 0, 0,1,1,1,
+ * SimParameter.Speed_of_decoy, 0, SimParameter.Operation_time_Decoy));
+ * m.add(con4);
+ * 
+ * content con5 = makeContent("scen_gen", new CombatEnt(5, "Terpedp", 0,
+ * 0,1,-1,1, SimParameter.Speed_Torpedo, 0, SimParameter.Live_time_Torpedo));
+ * m.add(con5);
  */
-

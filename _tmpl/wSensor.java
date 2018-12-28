@@ -12,8 +12,8 @@ package componentASW._tmpl;
 import java.awt.Dimension;
 import java.awt.Point;
 
-import componentASW.platform.Sensor_Actor;
-import componentASW.platform.Sensor_Updater;
+import componentASW._tmpl.platform.Sensor_Actor;
+import componentASW._tmpl.platform.Sensor_Updater;
 import view.modeling.ViewableAtomic;
 import view.modeling.ViewableComponent;
 import view.modeling.ViewableDigraph;

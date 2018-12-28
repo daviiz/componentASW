@@ -8,7 +8,7 @@ package componentASW.om;
 public class OM_Sensor {
 
 	// stores other platforms’ physical information
-	public static CombatEnt Data_Integrator(CombatEnt move_result,CombatEnt request_ent) {
+	public static CombatEnt Data_Integrator(CombatEnt move_result, CombatEnt request_ent) {
 		CombatEnt _CombatEnt = new CombatEnt();
 		return _CombatEnt;
 	}
