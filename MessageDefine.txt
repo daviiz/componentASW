@@ -10,6 +10,6 @@ Inport:
 
 Outport:
 	wp_launch ；释放鱼雷指令 ：true / false
-	move_cmd  : 类型为：CombatEnt,战舰实时状态数据传递到WarshipManeuver中
+	move_cmd  : 简化处理  forward / back
 	wp_guidance ：控制鱼雷诱饵指令，简化处理 "wp_guidance"
 	

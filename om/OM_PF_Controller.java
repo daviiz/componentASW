@@ -27,7 +27,7 @@ public class OM_PF_Controller {
 	 * @param CurrentMethod
 	 * @return
 	 */
-	public static CombatEnt Recon(int CurrentMethod,CombatEnt ent) {
+	public static CombatEnt Recon(CombatEnt ent) {
 		return ent;
 	}
 

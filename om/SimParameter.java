@@ -125,6 +125,8 @@ public class SimParameter {
 	 */
 	public static int Source_level_Decoy = 140;
 
-	//
-
+	public static int getSpeedByName(String entName) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

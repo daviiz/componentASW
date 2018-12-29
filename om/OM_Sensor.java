@@ -1,7 +1,5 @@
 package componentASW.om;
 
-import java.util.ArrayList;
-
 /**
  * 
  * @author daiwenzhi
@@ -9,36 +7,31 @@ import java.util.ArrayList;
  */
 public class OM_Sensor {
 
-	private static  ArrayList<CombatEnt> CombatEntList = new ArrayList<CombatEnt>();
 	// stores other platforms’ physical information
 	public static void Data_Integrator(CombatEnt move_result) {
-		for(CombatEnt e : CombatEntList) {
-			if(e.eq(move_result.getName())){
-				CombatEntList.remove(e);
-			}
-		}
-		CombatEntList.add(move_result);
+		
+		MessageBus.getSingleton().updateEntity(move_result);
 	}
 
 	// conducts the detection algorithm designed here
 	public static CombatEnt Detection_Algorithm(String entity) {
-		CombatEnt currEnt = null; 
-		int currLoc = 0;
-		CombatEnt threatInfo = null;
-		for(CombatEnt e : CombatEntList) {
+		int currLoc = 999999;
+		CombatEnt threatInfo = new CombatEnt();
+		for(CombatEnt e : MessageBus.getSingleton().getCombatEntList()) {
 			if(e.eq(entity)){
-				currEnt = e;
 				currLoc = e.getY();
 			}
 		}
+		if(currLoc>100000) return threatInfo;
+		
 		if(entity.equals("warship")) {
-			for(CombatEnt e : CombatEntList) {
+			for(CombatEnt e : MessageBus.getSingleton().getCombatEntList()) {
 				if(Math.abs(currLoc-e.getY())<3000 && e.getBelong() == -1)
 					threatInfo = e;
 			}
 		}
 		if(entity.equals("submarine")) {
-			for(CombatEnt e : CombatEntList) {
+			for(CombatEnt e : MessageBus.getSingleton().getCombatEntList()) {
 				if(Math.abs(currLoc-e.getY())<15000 && e.getBelong() == 1)
 					threatInfo =  e;
 			}
@@ -46,5 +39,4 @@ public class OM_Sensor {
 		
 		return threatInfo;
 	}
-
 }

@@ -14,13 +14,15 @@ import view.modeling.ViewableAtomic;
  */
 public class SubmarineManeuver_Actor extends ViewableAtomic {
 
-	private double t_MOVE = 5;
+	private double t_MOVE = 2;
 	private double t_FUEL = 0;
 
 	private CombatEnt cmd_info_ent;
 	private CombatEnt env_info_ent;
-	private CombatEnt engage_result_ent;
-
+	private CombatEnt move_result_ent;
+	
+	private entity engage_result_ent;
+	
 	private boolean cmd_check;
 
 	private boolean move_finished;
@@ -60,9 +62,9 @@ public class SubmarineManeuver_Actor extends ViewableAtomic {
 		super.initialize();
 		phase = "IDLE";
 		sigma = INFINITY;
-		cmd_info_ent = null;
-		env_info_ent = null;
-		engage_result_ent = null;
+		cmd_info_ent = new CombatEnt();
+		env_info_ent = new CombatEnt();
+		engage_result_ent = new entity();
 		cmd_check = false;
 		move_finished = false;
 		fuel_check = false;
@@ -98,18 +100,17 @@ public class SubmarineManeuver_Actor extends ViewableAtomic {
 	public void deltint() {
 
 		if (phaseIs("MOVE")) {
-			cmd_info_ent = OM_Maneuver.Motion_Equation(cmd_info_ent);//
-			move_finished = OM_Maneuver.Cmd_Check(cmd_info_ent);
-			if (move_finished) {
+			cmd_check = OM_Maneuver.Cmd_Check(cmd_info_ent);//完成机动指令
+			if (cmd_check) {
 				holdIn("IDLE", INFINITY);
 			} else {
-				cmd_info_ent = OM_Maneuver.Motion_Equation(cmd_info_ent); // move_result
+				move_result_ent = OM_Maneuver.Motion_Equation(cmd_info_ent); // move_result
 				holdIn("FUEL", 0);
 			}
 		} else if (phaseIs("FUEL")) {
 			fuel_check = OM_Maneuver.Fuel_Check(cmd_info_ent);
 			fuel_exhausted = fuel_check;
-			if (fuel_check) {
+			if (fuel_exhausted) {
 				holdIn("IDLE", INFINITY);
 			} else {
 				holdIn("MOVE", t_MOVE);

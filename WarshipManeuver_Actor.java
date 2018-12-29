@@ -19,7 +19,9 @@ public class WarshipManeuver_Actor extends ViewableAtomic {
 
 	private CombatEnt cmd_info_ent;
 	private CombatEnt env_info_ent;
-	private CombatEnt engage_result_ent;
+	private CombatEnt move_result_ent;
+	
+	private entity engage_result_ent;
 
 	private boolean cmd_check;
 
@@ -60,9 +62,9 @@ public class WarshipManeuver_Actor extends ViewableAtomic {
 		super.initialize();
 		phase = "IDLE";
 		sigma = INFINITY;
-		cmd_info_ent = null;
-		env_info_ent = null;
-		engage_result_ent = null;
+		cmd_info_ent = new CombatEnt();
+		env_info_ent = new CombatEnt();
+		engage_result_ent = new entity();
 		cmd_check = false;
 		move_finished = false;
 		fuel_check = false;
@@ -75,6 +77,7 @@ public class WarshipManeuver_Actor extends ViewableAtomic {
 			if (phaseIs("IDLE")) {
 				if (messageOnPort(x, "scen_info", i)) {
 					// do nothing ...
+					holdIn("IDLE", INFINITY);
 				} else if (messageOnPort(x, "cmd_info", i)) {
 					cmd_info_ent = new CombatEnt((CombatEnt) x.getValOnPort("cmd_info", i)); // 包含机动指令
 					holdIn("MOVE", t_MOVE);
@@ -87,7 +90,7 @@ public class WarshipManeuver_Actor extends ViewableAtomic {
 					env_info_ent = new CombatEnt((CombatEnt) x.getValOnPort("env_info", i)); // 环境信息
 					holdIn("MOVE", t_MOVE);
 				} else if (messageOnPort(x, "engage_result", i)) {
-					engage_result_ent = new CombatEnt((CombatEnt) x.getValOnPort("engage_result", i)); // 交战结果
+					engage_result_ent = x.getValOnPort("engage_result", i); // 交战结果
 					holdIn("IDLE", INFINITY);
 				}
 			}
@@ -98,18 +101,17 @@ public class WarshipManeuver_Actor extends ViewableAtomic {
 	public void deltint() {
 
 		if (phaseIs("MOVE")) {
-			cmd_info_ent = OM_Maneuver.Motion_Equation(cmd_info_ent);//
-			move_finished = OM_Maneuver.Cmd_Check(cmd_info_ent);
-			if (move_finished) {
+			cmd_check = OM_Maneuver.Cmd_Check(cmd_info_ent);//完成机动指令
+			if (cmd_check) {
 				holdIn("IDLE", INFINITY);
 			} else {
-				cmd_info_ent = OM_Maneuver.Motion_Equation(cmd_info_ent); // move_result
+				move_result_ent = OM_Maneuver.Motion_Equation(cmd_info_ent); // move_result
 				holdIn("FUEL", 0);
 			}
 		} else if (phaseIs("FUEL")) {
 			fuel_check = OM_Maneuver.Fuel_Check(cmd_info_ent);
 			fuel_exhausted = fuel_check;
-			if (fuel_check) {
+			if (fuel_exhausted) {
 				holdIn("IDLE", INFINITY);
 			} else {
 				holdIn("MOVE", t_MOVE);
@@ -133,7 +135,7 @@ public class WarshipManeuver_Actor extends ViewableAtomic {
 			content con = makeContent("move_finished", new entity(move_finished + ""));
 			m.add(con);
 
-			content con2 = makeContent("move_result", new CombatEnt(cmd_info_ent));
+			content con2 = makeContent("move_result", new CombatEnt(move_result_ent));
 			m.add(con2);
 		}
 		return m;

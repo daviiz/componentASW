@@ -1,5 +1,6 @@
 package componentASW;
 
+import GenCol.entity;
 import componentASW.om.CombatEnt;
 import componentASW.om.OM_Maneuver;
 import model.modeling.content;
@@ -15,7 +16,10 @@ public class SubmarineManeuver_Updater extends ViewableAtomic {
 
 	private double iINTERPRETATION = 0;
 
-	private CombatEnt currEnt;
+	private entity move_cmd_ent;
+	
+	private CombatEnt cmd_info_ent;
+
 
 	// Add Default Constructor
 	public SubmarineManeuver_Updater() {
@@ -43,19 +47,22 @@ public class SubmarineManeuver_Updater extends ViewableAtomic {
 		super.initialize();
 		phase = "WAIT"; // WAIT INTERPRETATION
 		sigma = INFINITY; //
-		currEnt = new CombatEnt();
+		move_cmd_ent = new entity();
+		cmd_info_ent = new CombatEnt();
 	}
 
 	// Add external transition function
 	public void deltext(double e, message x) {
 		Continue(e);
-		currEnt = null;
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("WAIT")) {
-				holdIn("INTERPRETATION", iINTERPRETATION);
+				if (messageOnPort(x, "move_cmd", i)) {
+					move_cmd_ent = new CombatEnt((CombatEnt) x.getValOnPort("move_cmd", i));
+					holdIn("INTERPRETATION", iINTERPRETATION);
+				}
 			} else if (phaseIs("INTERPRETATION")) {
 				if (messageOnPort(x, "move_cmd", i)) {
-					currEnt = new CombatEnt((CombatEnt) x.getValOnPort("move_cmd", i));
+					move_cmd_ent = new CombatEnt((CombatEnt) x.getValOnPort("move_cmd", i));
 				}
 			}
 		}
@@ -65,7 +72,7 @@ public class SubmarineManeuver_Updater extends ViewableAtomic {
 	public void deltint() {
 		if (phaseIs("INTERPRETATION")) {
 			// execute om function：
-			currEnt = OM_Maneuver.Cmd_Inerpreter(currEnt);
+			cmd_info_ent = OM_Maneuver.Cmd_Inerpreter("submarine",move_cmd_ent.getName());
 
 			holdIn("WAIT", INFINITY);
 		}
@@ -80,7 +87,7 @@ public class SubmarineManeuver_Updater extends ViewableAtomic {
 		message m = new message();
 		if (phaseIs("INTERPRETATION")) {
 
-			content con = makeContent("cmd_info", new CombatEnt(currEnt));
+			content con = makeContent("cmd_info",  cmd_info_ent);
 			m.add(con);
 		}
 		return m;

@@ -91,6 +91,7 @@ public class CombatEnt extends GenCol.entity {
 
 		return ("实体:" + name + ",位置:(" + x + "," + y + "),指令:"+orderStr);
 	}
+	
 
 	public int getId() {
 		return id;

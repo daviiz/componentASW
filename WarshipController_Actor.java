@@ -16,14 +16,14 @@ import view.modeling.ViewableAtomic;
  */
 public class WarshipController_Actor extends ViewableAtomic {
 
-	private double tRECON = 10;
+	private double tRECON = 7;
 	private double tAPPRCH = 5;
 	private double tCOMBAT = 20;
 	private double tEVASION = 20;
 	private double tCTRL = 15;
 	private double tEND = INFINITY;
 
-	private CombatEnt scen_info_ent; // 战舰实体状态信息
+	private CombatEnt current_ent; // 战舰实体状态信息
 	
 	
 	
@@ -67,7 +67,7 @@ public class WarshipController_Actor extends ViewableAtomic {
 		phase = "IDLE";
 		sigma = INFINITY;
 		
-		scen_info_ent = new CombatEnt();
+		current_ent = new CombatEnt();
 		move_finished_ent = new entity();
 		target_info_ent = new CombatEnt();
 		engage_result_ent = new entity();
@@ -81,7 +81,7 @@ public class WarshipController_Actor extends ViewableAtomic {
 			if (phaseIs("IDLE")) {
 				if (messageOnPort(x, "scen_info", i)) {
 					if (x.getValOnPort("scen_info", i).getName().equals("warship")) {
-						scen_info_ent = new CombatEnt((CombatEnt) x.getValOnPort("scen_info", i));
+						current_ent = new CombatEnt((CombatEnt) x.getValOnPort("scen_info", i));
 						holdIn("RECONNNAISSANCE", tRECON);
 					}
 				} else if (messageOnPort(x, "move_finished", i)) {
@@ -122,11 +122,11 @@ public class WarshipController_Actor extends ViewableAtomic {
 	// Add internal transition function
 	public void deltint() {
 		if (phaseIs("RECONNNAISSANCE")) {
-			scen_info_ent = OM_PF_Controller.Recon(0,scen_info_ent);
+			current_ent = OM_PF_Controller.Recon(current_ent);
 			holdIn("IDLE", INFINITY);
 
 		} else if (phaseIs("APPROACH")) {
-			
+			OM_PF_Controller.Apprch(current_ent);
 			holdIn("IDLE", INFINITY);
 			// ?红蓝区分吗?
 			// holdIn("COMBAT",tCOMBAT);
@@ -153,19 +153,19 @@ public class WarshipController_Actor extends ViewableAtomic {
 		message m = new message();
 		if (phaseIs("RECONNNAISSANCE")) {
 			// message m = new message();
-			scen_info_ent.setOrderStr("move_cmd");
-			content con = makeContent("move_cmd", new CombatEnt(scen_info_ent));
+			current_ent.setOrderStr("move_cmd");
+			content con = makeContent("move_cmd", new CombatEnt(current_ent));
 			m.add(con);
 		} else if (phaseIs("APPROACH")) {
-			scen_info_ent.setOrderStr("move_cmd");
-			content con = makeContent("move_cmd", new CombatEnt(scen_info_ent));
+			current_ent.setOrderStr("move_cmd");
+			content con = makeContent("move_cmd", new CombatEnt(current_ent));
 			m.add(con);
 		} else if (phaseIs("COMBAT")) {
 			content con = makeContent("wp_launch", new entity("true"));
 			m.add(con);
 		} else if (phaseIs("EVASION")) {
-			scen_info_ent.setOrderStr("move_cmd");
-			content con = makeContent("move_cmd", new CombatEnt(scen_info_ent));
+			current_ent.setOrderStr("move_cmd");
+			content con = makeContent("move_cmd", new CombatEnt(current_ent));
 			m.add(con);
 		} else if (phaseIs("CONTROL")) {
 			content con = makeContent("wp_guidance", new entity("wp_guidance"));
