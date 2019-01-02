@@ -68,7 +68,7 @@ public class SubmarineController_Updater extends ViewableAtomic {
 				// }
 			}
 			if (phaseIs("IDENTIFICATION")) {
-				threatInfo = null;
+				threatInfo = new CombatEnt();
 				// for (int i = 0; i < x.size(); i++) {
 				if (messageOnPort(x, "threat_info", i)) {
 					threatInfo = new CombatEnt((CombatEnt) x.getValOnPort("threat_info", i));
@@ -95,7 +95,7 @@ public class SubmarineController_Updater extends ViewableAtomic {
 	public message out() {
 		message m = new message();
 		if (phaseIs("IDENTIFICATION")) {
-
+			threatInfo.setOrderStr("识别敌方战舰");
 			content con = makeContent("target_info", new CombatEnt(threatInfo));
 			m.add(con);
 

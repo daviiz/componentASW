@@ -110,7 +110,7 @@ public class WarshipSensor_Actor extends ViewableAtomic {
 	public message out() {
 		message m = new message();
 		if (phaseIs("DETECT")) {
-			content _cContent = makeContent("track_info", new CombatEnt(track_info_ent));
+			content _cContent = makeContent("threat_info", new CombatEnt(track_info_ent));
 			m.add(_cContent);
 		} else if (phaseIs("PERIOD")) {
 			// content _cContent = makeContent("threat_info", new

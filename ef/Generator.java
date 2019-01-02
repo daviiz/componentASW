@@ -62,7 +62,9 @@ public class Generator extends ViewableAtomic {
 		for (int i = 0; i < x.getLength(); i++) {
 			if (messageOnPort(x, "wp_launch", i)) {
 				shipEnt = new CombatEnt((CombatEnt) x.getValOnPort("wp_launch", i));
+				holdIn("FIRE", 0);
 			}
+			
 		}
 	}
 
@@ -101,6 +103,14 @@ public class Generator extends ViewableAtomic {
 //				content con2 = makeContent("entity_gen", shipEnt);
 //				m.add(con2);
 //			}
+			passivate();
+		}else if(phaseIs("FIRE")){
+			int y= MessageBus.getSingleton().getEntityByName("submarine").getY();
+			CombatEnt _t = new CombatEnt(3, "torpedo", 0, y, 1, -1, 1,
+					SimParameter.Speed_Torpedo, 0, SimParameter.Live_time_Torpedo,"发射鱼类");
+			content con = makeContent("entity_gen", _t);
+			MessageBus.getSingleton().addCombatEnt(_t);
+			m.add(con);
 			passivate();
 		}
 		return m;

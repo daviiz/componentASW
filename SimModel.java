@@ -117,6 +117,8 @@ public class SimModel extends ViewableDigraph {
 		addCoupling(warship, "move_result", damageAssessment, "move_result");
 		addCoupling(warship, "move_result", decoy_1, "move_result");
 		addCoupling(warship, "move_result", decoy_2, "move_result");
+		addCoupling(warship, "move_result", submarine, "move_result");
+		addCoupling(warship, "move_result", terpedo_1, "move_result");
 //        addCoupling(warship,"move_result",decoy_3,"move_result");
 //        addCoupling(warship,"move_result",decoy_4,"move_result");
 
@@ -128,7 +130,9 @@ public class SimModel extends ViewableDigraph {
 		addCoupling(warship, "wp_launch", this, "wp_launch");
 
 		addCoupling(submarine, "move_result", damageAssessment, "move_result");
-		addCoupling(submarine, "move_result", terpedo_1, "move_result");
+		addCoupling(submarine, "move_result", decoy_1, "move_result");
+		addCoupling(submarine, "move_result", decoy_2, "move_result");
+		addCoupling(submarine, "move_result", warship, "move_result");
 		addCoupling(submarine, "move_result", terpedo_1, "move_result");
 
 		addCoupling(submarine, "wp_guidance", terpedo_1, "wp_guidance");
@@ -140,14 +144,19 @@ public class SimModel extends ViewableDigraph {
 		// 诱饵：--所有的武器和平台模型实例都应该接收基础的信号量，因为他们都带有传感器，至于消息在不在接受范围内，请在传感器的OM中体现！
 		addCoupling(decoy_1, "move_result", enviroment, "move_result");
 		addCoupling(decoy_1, "move_result", submarine, "move_result");
+		addCoupling(decoy_1, "move_result", terpedo_1, "move_result");
+		
 		addCoupling(decoy_2, "move_result", enviroment, "move_result");
 		addCoupling(decoy_2, "move_result", submarine, "move_result");
+		addCoupling(decoy_2, "move_result", terpedo_1, "move_result");
 //        addCoupling(decoy_3,"move_result",enviroment,"move_result");
 //        addCoupling(decoy_3,"move_result",submarine,"move_result");
 //        addCoupling(decoy_4,"move_result",enviroment,"move_result");
 //        addCoupling(decoy_4,"move_result",submarine,"move_result");
 		addCoupling(terpedo_1, "move_result", enviroment, "move_result");
 		addCoupling(terpedo_1, "move_result", warship, "move_result");
+		addCoupling(terpedo_1, "move_result", decoy_1, "move_result");
+		addCoupling(terpedo_1, "move_result", decoy_2, "move_result");
 
 		addCoupling(terpedo_1, "guidance_info", warship, "guidance_info");
 		

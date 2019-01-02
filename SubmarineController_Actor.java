@@ -17,12 +17,14 @@ public class SubmarineController_Actor extends ViewableAtomic {
 
 	private double tRECON = 10;
 	private double tAPPRCH = 5;
-	private double tCOMBAT = 20;
+	private double tCOMBAT = 0;
 	private double tEVASION = 20;
 	private double tCTRL = 15;
 	private double tEND = INFINITY;
 
 	private CombatEnt scen_info_ent;
+	
+	private CombatEnt target_info_ent;
 
 	// Add Default Constructor
 	public SubmarineController_Actor() {
@@ -60,6 +62,7 @@ public class SubmarineController_Actor extends ViewableAtomic {
 		sigma = INFINITY;
 		tRECON = 2;
 		scen_info_ent = new CombatEnt();
+		target_info_ent = new CombatEnt();
 	}
 
 	// Add external transition function
@@ -95,6 +98,12 @@ public class SubmarineController_Actor extends ViewableAtomic {
 				if (messageOnPort(x, "target_info", i)) {
 					holdIn("EVASION", tEVASION);
 				}
+			}else if (phaseIs("RECONNNAISSANCE"))
+			{
+				if (messageOnPort(x, "target_info", i)) {
+					target_info_ent =new CombatEnt((CombatEnt)x.getValOnPort("target_info", i));
+					holdIn("COMBAT", tCOMBAT);
+				}
 			}
 		}
 	}
@@ -112,7 +121,7 @@ public class SubmarineController_Actor extends ViewableAtomic {
 			// holdIn("COMBAT",tCOMBAT);
 
 		} else if (phaseIs("COMBAT")) {
-
+			
 			holdIn("EVASION", tEVASION);
 
 		} else if (phaseIs("EVASION")) {
@@ -139,8 +148,9 @@ public class SubmarineController_Actor extends ViewableAtomic {
 		} else if (phaseIs("APPROACH")) {
 			content con = makeContent("move_cmd", new entity("move_cmd"));
 			m.add(con);
-		} else if (phaseIs("COMBAT")) {
-			content con = makeContent("wp_launch", new entity("wp_launch"));
+		} else if (phaseIs("COMBAT") && target_info_ent.getBelong()==(1)) {
+			target_info_ent.setOrderStr("对此目标发射鱼类");
+			content con = makeContent("wp_launch", target_info_ent);
 			m.add(con);
 		} else if (phaseIs("EVASION")) {
 			content con = makeContent("move_cmd", new entity("move_cmd"));

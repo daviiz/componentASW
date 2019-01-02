@@ -35,6 +35,7 @@ public class CombatEnt extends GenCol.entity {
 		this.name = "combatEntBase";
 		this.status = 1;
 		this.live_time = 999999;
+		this.belong = 0;
 	}
 
 	public CombatEnt(CombatEnt ent) {

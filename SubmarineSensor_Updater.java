@@ -1,5 +1,7 @@
 package componentASW;
 
+import componentASW.om.MessageBus;
+
 import GenCol.entity;
 import componentASW.om.CombatEnt;
 import componentASW.om.OM_Sensor;
