@@ -45,7 +45,7 @@ public class DecoyController_Updater extends ViewableAtomic {
 		phase = "WAIT"; // WAIT IDENTIFICATION
 		sigma = INFINITY;
 		tIDENTIFY = 10.0;
-		_threatInfo = null;
+		_threatInfo = new CombatEnt();
 	}
 
 	// Add external transition function

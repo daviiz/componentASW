@@ -52,6 +52,10 @@ public class TorpedoSensor_Actor extends ViewableAtomic {
 		super.initialize();
 		phase = "IDLE"; // s = { IDLE PERIOD DETECT REQUEST }
 		sigma = INFINITY;
+		
+		engage_result_ent = new entity();
+		responseEntity = new entity();
+		track_info_ent = new CombatEnt();
 	}
 
 	// Add external transition function

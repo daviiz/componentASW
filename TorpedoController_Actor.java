@@ -55,6 +55,11 @@ public class TorpedoController_Actor extends ViewableAtomic {
 		sigma = INFINITY;
 		tAPPRCH = 10;
 		tCTRL = 5;
+		
+		move_finished_Ent = new entity();
+		target_info_Ent = new CombatEnt();
+		wp_guidance_Ent = new entity();
+		engage_result_Ent = new entity();
 
 	}
 

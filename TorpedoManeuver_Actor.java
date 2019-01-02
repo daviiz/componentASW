@@ -66,6 +66,10 @@ public class TorpedoManeuver_Actor extends ViewableAtomic {
 		cmd_check = false;
 		move_finished = false;
 		fuel_check = false;
+		
+		cmd_info_ent = new CombatEnt();
+		env_info_ent = new CombatEnt();
+		engage_result_ent = new CombatEnt();
 	}
 
 	// Add external transition function

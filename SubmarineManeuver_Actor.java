@@ -68,6 +68,8 @@ public class SubmarineManeuver_Actor extends ViewableAtomic {
 		cmd_check = false;
 		move_finished = false;
 		fuel_check = false;
+		
+		move_result_ent = new CombatEnt();
 	}
 
 	// Add external transition function

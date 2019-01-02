@@ -16,7 +16,7 @@ import view.modeling.ViewableAtomic;
  */
 public class WarshipController_Actor extends ViewableAtomic {
 
-	private double tRECON = 7;
+	private double tRECON = 2;
 	private double tAPPRCH = 5;
 	private double tCOMBAT = 20;
 	private double tEVASION = 20;
@@ -66,7 +66,7 @@ public class WarshipController_Actor extends ViewableAtomic {
 		// 空闲-侦查-接近-战斗-逃逸-结束 }
 		phase = "IDLE";
 		sigma = INFINITY;
-		
+		tRECON = 2;
 		current_ent = new CombatEnt();
 		move_finished_ent = new entity();
 		target_info_ent = new CombatEnt();

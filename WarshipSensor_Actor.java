@@ -52,12 +52,15 @@ public class WarshipSensor_Actor extends ViewableAtomic {
 		super.initialize();
 		phase = "IDLE"; // s = { IDLE PERIOD DETECT REQUEST }
 		sigma = INFINITY;
+		
+		track_info_ent = new CombatEnt();
+		engage_result_ent = new entity();
+		responseEntity = new entity();
 	}
 
 	// Add external transition function
 	public void deltext(double e, message x) {
 		Continue(e);
-		engage_result_ent = null;
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("IDLE")) {
 				if (messageOnPort(x, "scen_info", i)) {

@@ -1,6 +1,5 @@
 package componentASW;
 
-import GenCol.entity;
 import componentASW.om.CombatEnt;
 import componentASW.om.OM_Maneuver;
 import model.modeling.content;
@@ -16,7 +15,7 @@ public class WarshipManeuver_Updater extends ViewableAtomic {
 
 	private double iINTERPRETATION = 0;
 
-	private entity move_cmd_ent;
+	private CombatEnt move_cmd_ent;
 	
 	private CombatEnt cmd_info_ent;
 
@@ -47,7 +46,7 @@ public class WarshipManeuver_Updater extends ViewableAtomic {
 		phase = "WAIT"; // WAIT INTERPRETATION
 		sigma = INFINITY; //
 		iINTERPRETATION = 0;
-		move_cmd_ent = new entity();
+		move_cmd_ent = new CombatEnt();
 		cmd_info_ent = new CombatEnt();
 	}
 
@@ -57,12 +56,12 @@ public class WarshipManeuver_Updater extends ViewableAtomic {
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("WAIT")) {
 				if (messageOnPort(x, "move_cmd", i)) {
-					move_cmd_ent = x.getValOnPort("move_cmd", i);
+					move_cmd_ent = new CombatEnt((CombatEnt)x.getValOnPort("move_cmd", i));
 					holdIn("INTERPRETATION", iINTERPRETATION);
 				}
 			} else if (phaseIs("INTERPRETATION")) {
 				if (messageOnPort(x, "move_cmd", i)) {
-					move_cmd_ent =x.getValOnPort("move_cmd", i);
+					move_cmd_ent = new CombatEnt((CombatEnt)x.getValOnPort("move_cmd", i));
 				}
 			}
 		}

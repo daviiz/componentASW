@@ -52,13 +52,15 @@ public class WarshipSensor_Updater extends ViewableAtomic {
 		phase = "UPDATE"; // S={ UPDATE REQUEST }
 		sigma = INFINITY;
 		tREQUEST = 0;
+		
+		move_result_ent = new CombatEnt();
+		request_ent = new CombatEnt();
 	}
 
 	// Add external transition function
 	public void deltext(double e, message x) {
 		Continue(e);
-		move_result_ent = null;
-		request_ent = null;
+		
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("UPDATE")) {
 				if (messageOnPort(x, "move_result", i)) {

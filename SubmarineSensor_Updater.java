@@ -1,5 +1,6 @@
 package componentASW;
 
+import GenCol.entity;
 import componentASW.om.CombatEnt;
 import componentASW.om.OM_Sensor;
 import model.modeling.content;
@@ -15,7 +16,7 @@ public class SubmarineSensor_Updater extends ViewableAtomic {
 
 	private CombatEnt move_result_ent;
 
-	private CombatEnt request_ent;
+	private entity request_ent;
 
 	private CombatEnt response_ent;
 
@@ -49,12 +50,15 @@ public class SubmarineSensor_Updater extends ViewableAtomic {
 		phase = "UPDATE"; // S={ UPDATE REQUEST }
 		sigma = INFINITY;
 		tREQUEST = 0;
+		response_ent = new CombatEnt();
+		move_result_ent = new CombatEnt();
+		request_ent = new entity();
 	}
 
 	// Add external transition function
 	public void deltext(double e, message x) {
 		Continue(e);
-		move_result_ent = null;
+		move_result_ent = new CombatEnt();
 		request_ent = null;
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("UPDATE")) {
@@ -64,7 +68,7 @@ public class SubmarineSensor_Updater extends ViewableAtomic {
 					}
 					OM_Sensor.Data_Integrator(move_result_ent);
 				} else if (messageOnPort(x, "request", i)) {
-					request_ent = new CombatEnt((CombatEnt) x.getValOnPort("request", i));
+					request_ent =  x.getValOnPort("request", i);
 					holdIn("REQUEST", tREQUEST);
 				}
 			}

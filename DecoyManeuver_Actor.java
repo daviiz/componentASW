@@ -60,9 +60,9 @@ public class DecoyManeuver_Actor extends ViewableAtomic {
 		super.initialize();
 		phase = "IDLE";
 		sigma = INFINITY;
-		cmd_info_ent = null;
-		env_info_ent = null;
-		engage_result_ent = null;
+		cmd_info_ent = new CombatEnt();
+		env_info_ent = new CombatEnt();
+		engage_result_ent = new CombatEnt();
 		cmd_check = false;
 		move_finished = false;
 		fuel_check = false;

@@ -56,15 +56,16 @@ public class DecoyController_Actor extends ViewableAtomic {
 		tAPPRCH = 10;
 		tCTRL = 5;
 
+		move_finished_Ent = new entity();
+		target_info_Ent = new CombatEnt();
+		wp_guidance_Ent =new  entity();
+		engage_result_Ent =new entity();
 	}
 
 	// Add external transition function
 	public void deltext(double e, message x) {
 		Continue(e);
-		move_finished_Ent = null;
-		target_info_Ent = null;
-		wp_guidance_Ent = null;
-		engage_result_Ent = null;
+		
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("IDLE")) {
 				if (messageOnPort(x, "scen_info", i)) {
