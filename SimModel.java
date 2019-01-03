@@ -88,7 +88,7 @@ public class SimModel extends ViewableDigraph {
 		// add(terpedo_2);
 
 		// Add Couplings
-		// addCoupling(ef_1_1, "entity_info", simModel_1_1, "entity_info");
+		addCoupling(this, "entity_info", terpedo_1, "entity_info");
 		addCoupling(this, "scen_info", damageAssessment, "scen_info");
 		addCoupling(this, "scen_info", enviroment, "scen_info");
 		addCoupling(this, "scen_info", warship, "scen_info");

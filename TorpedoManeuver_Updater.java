@@ -49,7 +49,6 @@ public class TorpedoManeuver_Updater extends ViewableAtomic {
 	// Add external transition function
 	public void deltext(double e, message x) {
 		Continue(e);
-		currEnt = null;
 		for (int i = 0; i < x.size(); i++) {
 			if (phaseIs("WAIT")) {
 				holdIn("INTERPRETATION", iINTERPRETATION);
@@ -65,7 +64,8 @@ public class TorpedoManeuver_Updater extends ViewableAtomic {
 	public void deltint() {
 		if (phaseIs("INTERPRETATION")) {
 			// execute om function：
-			currEnt = OM_Maneuver.Cmd_Inerpreter(currEnt);
+			//currEnt.set
+			currEnt = OM_Maneuver.Cmd_Inerpreter("torpedo");
 
 			holdIn("WAIT", INFINITY);
 		}

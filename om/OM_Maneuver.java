@@ -42,6 +42,17 @@ public class OM_Maneuver {
 		//MessageBus.getSingleton().updateEntity(_CombatEnt);
 		return _CombatEnt;
 	}
+	public static CombatEnt Cmd_Inerpreter(String _ent) {
+		CombatEnt _CombatEnt = MessageBus.getSingleton().getEntityByName(_ent);
+//		if (_order.equals("forward")) {
+//			_CombatEnt.setY(_CombatEnt.getY() + SimParameter.getSpeedByName(entName));
+//		} else if (_order.equals("back")){
+//			_CombatEnt.setY(_CombatEnt.getY() - SimParameter.getSpeedByName(entName));
+//		}
+		// update message in MessageBus about current entity
+		//MessageBus.getSingleton().updateEntity(_CombatEnt);
+		return _CombatEnt;
+	}
 
 	/// AM_Actor:
 	/**
